@@ -20,7 +20,6 @@
     "@sanity/vision",
     "@sanity/production-preview",
     "tabs",
-    "media",
     "asset-source-cloudinary-test"
   ],
   "parts": [
