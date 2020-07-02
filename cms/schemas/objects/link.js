@@ -1,9 +1,16 @@
 // import External from 'react-icons/lib/fa/external-link'
 // Follow sanity recommendations for internal/external links
 // https://www.sanity.io/guides/portable-text-internal-and-external-links
+import React from 'react'
 import { defaultLinkFields } from '../defaults/linkDefaults'
-import ExternalLinkRenderer from '../../custom/components/ExternalLinkRenderer'
+
 import ExternalLinkIcon from 'react-icons/lib/md/open-in-new'
+
+const ExternalLinkRenderer = props => (
+  <span>
+    {props.linkText || props.children} <ExternalLinkIcon />
+  </span>
+)
 
 export default {
   name: 'link',

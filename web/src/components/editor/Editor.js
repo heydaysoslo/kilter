@@ -5,11 +5,29 @@ import { LinkResolver } from '../resolvers'
 import Quote from './Quote'
 import Figure from './Figure'
 import Oembed from '../Oembed'
-import { H3, H2, P, Button, Accordion } from '../elements'
+import { H3, H2, P, Button, Accordion, A } from '../elements'
+
+const EditorLink = props => {
+  // Make links work with previews:
+  const linkProps = props?.mark?.projection || props.mark
+  if (props?.mark?.linkStyle === 'button') {
+    return (
+      <Button as={LinkResolver} link={linkProps}>
+        {props.children}
+      </Button>
+    )
+  }
+  return (
+    <A className="link" as={LinkResolver} link={linkProps}>
+      {props.children}
+    </A>
+  )
+}
 
 export const serializers = {
   types: {
     block(props) {
+      console.log('block -> props', props)
       if (props.node.children.text && props.node.children.text.length === 0)
         return null
       switch (props.node.style) {
@@ -81,26 +99,18 @@ export const serializers = {
     }
   },
   marks: {
+    internalLink(props) {
+      return <EditorLink {...props} />
+    },
     link(props) {
-      const link = props?.mark?.externalLink?.url || props?.mark?.reference
-      if (!link) return props.children
-      return (
-        <LinkResolver
-          openInNewTab={props?.mark?.externalLink?.blank}
-          data={link}
-        >
-          {props.children ||
-            props?.mark?.title ||
-            props?.mark?.reference?.title}
-        </LinkResolver>
-      )
+      return <EditorLink {...props} />
     }
   }
 }
 
-const Editor = ({ blocks, className }) => {
+const Editor = ({ blocks, ...props }) => {
   return (
-    <div>
+    <div {...props}>
       <BaseBlockContent
         className="Editor__blocks"
         blocks={blocks}

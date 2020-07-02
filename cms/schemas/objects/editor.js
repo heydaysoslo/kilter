@@ -1,3 +1,17 @@
+import React from 'react'
+
+const strongRenderer = props => (
+  <span style={{ fontWeight: 'bold' }}>{props.children}</span>
+)
+
+const LeadTextRenderer = props => (
+  <span style={{ fontSize: '2em', lineHeight: 1.1 }}>{props.children}</span>
+)
+
+const SmallTextRenderer = props => (
+  <span style={{ fontSize: '.85em', lineHeight: 1.1 }}>{props.children}</span>
+)
+
 /**
  * This is the schema definition for the rich text fields used for
  * for this blog studio. When you import it in schemas.js it can be
@@ -8,7 +22,7 @@
  *    type: 'editor'
  *  }
  */
-export default {
+const editor = {
   title: 'Editor',
   name: 'editor',
   type: 'array',
@@ -24,8 +38,20 @@ export default {
         { title: 'Normal', value: 'normal' },
         { title: 'H2', value: 'h2' },
         { title: 'H3', value: 'h3' },
-        { title: 'Large text', value: 'large' },
-        { title: 'Small text', value: 'small' }
+        {
+          title: 'Lead text',
+          value: 'lead',
+          blockEditor: {
+            render: LeadTextRenderer
+          }
+        },
+        {
+          title: 'Small text',
+          value: 'small',
+          blockEditor: {
+            render: SmallTextRenderer
+          }
+        }
         // { title: 'Quote', value: 'blockquote' }
       ],
       lists: [
@@ -37,7 +63,11 @@ export default {
         // Decorators usually describe a single property – e.g. a typographic
         // preference or highlighting by editors.
         decorators: [
-          { title: 'Strong', value: 'strong' }
+          {
+            title: 'Strong',
+            value: 'strong',
+            blockEditor: { render: strongRenderer }
+          }
           // { title: 'Emphasis', value: 'em' }
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
@@ -45,12 +75,12 @@ export default {
           {
             name: 'link',
             title: 'Link',
-            type: 'link'
+            type: 'link' // Find render comps in link.js
           },
           {
             name: 'internalLink',
             type: 'internalLink',
-            title: 'Internal Link'
+            title: 'Internal Link' // Find render comps in internalLink.js
           }
         ]
       }
@@ -75,3 +105,25 @@ export default {
     }
   ]
 }
+
+export const editorMinimal = {
+  title: 'Editor',
+  name: 'editorMinimal',
+  type: 'array',
+  of: [
+    {
+      ...editor.of[0],
+      lists: [],
+      styles: [
+        ...editor.of[0].styles.filter(
+          style =>
+            style.value === 'normal' ||
+            style.value === 'lead' ||
+            style.value === 'small'
+        )
+      ]
+    }
+  ]
+}
+
+export default editor
