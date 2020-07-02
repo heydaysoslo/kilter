@@ -6,14 +6,14 @@ import { motion } from 'framer-motion'
 /**
  * Usage:
  *
- * <InView
+ * <AnimateInView
  *   className="Card"
  *   activeClassName="Card--is-visible"
  *   onInView={props => console.log(props.inView ? `I'm in view` : `I'm not in view`)}
  *   element="span"
  * >
  *   // Add children
- * </InView>
+ * </AnimateInView>
  *
  * Other resources
  * 📚Package: https://www.npmjs.com/package/react-intersection-observer
