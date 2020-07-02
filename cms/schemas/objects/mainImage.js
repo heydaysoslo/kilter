@@ -1,13 +1,11 @@
+import d from '../defaults'
+
 export default {
   name: 'mainImage',
   title: 'Main image',
   type: 'object',
   fields: [
-    {
-      name: 'image',
-      title: 'Image',
-      type: 'cloudinarySingleImage'
-    },
+    d.image,
     {
       name: 'alt',
       title: `Alternative text`,

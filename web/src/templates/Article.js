@@ -45,15 +45,7 @@ export const query = graphql`
     authors: _rawAuthors(resolveReferences: { maxDepth: 20 })
     pagebuilder: _rawPagebuilder(resolveReferences: { maxDepth: 20 })
     seo {
-      title
-      description
-      image {
-        asset {
-          fixed(width: 1200, height: 630) {
-            ...GatsbySanityImageFixed
-          }
-        }
-      }
+      ...SEO
     }
   }
 `

@@ -132,7 +132,7 @@ export const query = graphql`
   fragment MainImage on SanityMainImage {
     alt
     _key
-    image {
+    cldimage {
       ...CloudinaryImage
     }
   }

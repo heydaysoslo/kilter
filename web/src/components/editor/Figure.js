@@ -1,6 +1,6 @@
 import React from 'react'
-import SanityImage from './SanityImage'
 import styled, { css } from 'styled-components'
+import CloudinaryImage from '../elements/CloudinaryImage'
 
 const Figure = ({ node, aspectRatio, className }) => {
   if (!node || !node.asset) {
@@ -8,7 +8,11 @@ const Figure = ({ node, aspectRatio, className }) => {
   }
   return (
     <figure className={className}>
-      <SanityImage key={node.asset?.id} node={node} aspectRatio={aspectRatio} />
+      <CloudinaryImage
+        key={node.asset?.id}
+        node={node}
+        aspectRatio={aspectRatio}
+      />
       {node.caption && (
         <figcaption className="Figure__caption">{node.caption}</figcaption>
       )}

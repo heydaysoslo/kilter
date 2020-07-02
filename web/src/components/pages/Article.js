@@ -3,11 +3,11 @@ import { graphql, useStaticQuery } from 'gatsby'
 
 import { getReadTime } from '../../utils/sanityHelpers'
 import Editor from '../editor'
-import SanityImage from '../editor/SanityImage'
 import { Grid, GridItem, Container, Card } from '../elements'
 import Share from '../Share'
 import PageBuilder from '../pagebuilder/Pagebuilder'
 import Author from '../elements/Author'
+import CloudinaryImage from '../elements/CloudinaryImage'
 
 const Article = page => {
   const {
@@ -39,7 +39,7 @@ const Article = page => {
               {title && <h1 className="Article__title">{title}</h1>}
               {_rawMainImage && (
                 <div className="Article__image">
-                  <SanityImage node={_rawMainImage} />
+                  <CloudinaryImage node={_rawMainImage} />
                 </div>
               )}
             </header>

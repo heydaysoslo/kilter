@@ -1,6 +1,5 @@
 import React from 'react'
 import { Field, ErrorMessage } from 'formik'
-import cc from 'classcat'
 
 const Input = ({
   name,
@@ -22,10 +21,6 @@ const Input = ({
         </label>
       )}
       <Field
-        className={cc({
-          Form__input: true,
-          'Form__input--error': errors[name] && touched[name]
-        })}
         id={name}
         type={type}
         name={name}

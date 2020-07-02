@@ -8,5 +8,10 @@ export default {
     name: 'subtitle',
     title: 'Sub Title',
     type: 'string'
+  },
+  image: {
+    name: 'cldimage',
+    title: 'Image',
+    type: 'cloudinarySingleImage'
   }
 }

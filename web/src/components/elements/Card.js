@@ -2,18 +2,19 @@ import React from 'react'
 
 import AspectContainer from './AspectContainer'
 import { LinkResolver } from '../resolvers'
-import Editor, { SanityImage } from '../editor'
-import InView from '../InView'
+import Editor from '../editor'
 import styled, { css } from 'styled-components'
 import { P } from './Typography'
 import { spacing } from '../../styles/utilities'
+import CloudinaryImage from './CloudinaryImage'
+import AnimateInView from './AnimateInView'
 
 const Card = ({ className, title, image, excerpt, link }) => (
-  <InView className={className} activeClassName="is-visible">
+  <AnimateInView className={className} activeClassName="is-visible">
     <LinkResolver link={link}>
       <div className="media">
         {image ? (
-          <SanityImage node={image} aspectRatio="portrait" />
+          <CloudinaryImage node={image} aspectRatio="portrait" />
         ) : (
           <AspectContainer
             aspect={{
@@ -33,7 +34,7 @@ const Card = ({ className, title, image, excerpt, link }) => (
         </div>
       )}
     </LinkResolver>
-  </InView>
+  </AnimateInView>
 )
 
 export default styled(Card)(

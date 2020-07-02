@@ -1,14 +1,16 @@
+import d from '../defaults'
 import MdImage from 'react-icons/lib/md/image'
 
 export default {
   name: 'figure',
   title: 'Image',
-  type: 'image',
+  type: 'object',
   // options: {
   //   hotspot: true
   // },
   icon: MdImage,
   fields: [
+    d.image,
     {
       name: 'alt',
       type: 'string',

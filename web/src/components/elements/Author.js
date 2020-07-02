@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
-import SanityImage from '../editor/SanityImage'
+import CloudinaryImage from './CloudinaryImage'
 
 const StyledAuthor = styled.div`
   display: flex;
@@ -26,7 +25,7 @@ export default function Author({ person }) {
     <StyledAuthor>
       {person?.image && (
         <div className="image">
-          <SanityImage node={person.image} aspectRatio="square" />
+          <CloudinaryImage node={person.image} aspectRatio="square" />
         </div>
       )}
       {person?.name && <h4 className="title">{person.name}</h4>}

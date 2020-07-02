@@ -1,6 +1,5 @@
 import React from 'react'
 
-import SanityImage from '../editor/SanityImage'
 import Editor from '../editor/'
 import { LinkResolver, CloudinaryMediaResolver } from '../resolvers'
 import { H3, Grid } from '../elements'

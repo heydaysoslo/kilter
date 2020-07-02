@@ -3,8 +3,8 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import styled, { css } from 'styled-components'
 
 import Menu from './Menu'
-import { Container, H1, Icon, Grid, GridItem } from './elements'
-import { spacing, bp } from '../styles/utilities'
+import { Container, Icon, Grid, GridItem } from './elements'
+import { spacing } from '../styles/utilities'
 import { LinkResolver } from './resolvers'
 import AppContext from './context/AppContext'
 
@@ -35,9 +35,8 @@ const Header = ({ className }: Props) => {
                 {menuItems.map(item => (
                   <LinkResolver
                     key={item._key}
-                    data={item?.externalLink?.url || item?.reference}
+                    link={item}
                     onClick={() => state.ShowMenu && actions.toggleMenu(false)}
-                    openInNewTab={item?.externalLink?.blank}
                   >
                     {item?.title || item?.reference?.title}
                   </LinkResolver>

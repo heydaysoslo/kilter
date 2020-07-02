@@ -246,12 +246,8 @@ const query = graphql`
   fragment SEO on SanitySeo {
     title
     description
-    image {
-      asset {
-        fixed(width: 1200, height: 630) {
-          ...GatsbySanityImageFixed
-        }
-      }
+    cldimage {
+      ...CloudinaryImage
     }
   }
   {

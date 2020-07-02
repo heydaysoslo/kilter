@@ -1,3 +1,5 @@
+import d from '../defaults'
+console.log(d.image)
 export default {
   name: 'seo',
   title: 'Seo',
@@ -16,9 +18,7 @@ export default {
       type: 'string'
     },
     {
-      name: 'image',
-      title: 'Image',
-      type: 'image',
+      ...d.image,
       description:
         'The images that appears in search results and social media sharing'
     }

@@ -8,7 +8,6 @@ import Section from './Section'
 import TextImageSplit from './TextImageSplit'
 import VideoSection from './VideoSection'
 import Tabs from '../elements/Tabs'
-import cc from 'classcat'
 import styled from 'styled-components'
 import { spacing } from '../../styles/utilities'
 
@@ -37,13 +36,7 @@ const PageBuilder = ({ sections }) => {
       {sections.map((section, index) => {
         const Component = sectionTypes[section._type] || null
         return Component ? (
-          <div
-            key={section._key}
-            className={cc({
-              PageBuilder__item: true,
-              [`PageBuilder__item--${section._type}`]: section._type
-            })}
-          >
+          <div key={section._key}>
             <Component
               {...section}
               prevComp={sections[index - 1] ? sections[index - 1] : null}
