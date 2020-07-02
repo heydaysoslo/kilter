@@ -29,7 +29,7 @@ const Header = ({ className }: Props) => {
             <h2>Kilter</h2>
             <p className="interactive-text">Systems in balance</p>
           </GridItem>
-          <GridItem span={{ xs: 3, md: 6 }}>
+          <GridItem span={{ xs: 4, md: 6 }}>
             {menuItems && (
               <Menu>
                 {menuItems.map(item => (

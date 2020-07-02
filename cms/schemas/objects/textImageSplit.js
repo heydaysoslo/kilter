@@ -1,3 +1,5 @@
+import d from '../defaults'
+
 export default {
   name: 'textImageSplit',
   title: 'Text Image Split',
@@ -13,9 +15,11 @@ export default {
       type: 'boolean'
     },
     {
-      name: 'title',
-      title: 'Title',
-      type: 'string',
+      ...d.title,
+      fieldset: 'content'
+    },
+    {
+      ...d.subtitle,
       fieldset: 'content'
     },
     {
@@ -23,11 +27,6 @@ export default {
       title: 'Content',
       type: 'editorMinimal',
       fieldset: 'content'
-    },
-    {
-      name: 'link',
-      title: 'Link',
-      type: 'link'
     },
     {
       name: 'image',
