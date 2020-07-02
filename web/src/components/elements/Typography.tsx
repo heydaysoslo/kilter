@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { applyStyleModifiers } from 'styled-components-modifiers'
 
-import { fonts } from '../../styles/utilities'
+import { fonts, spacing } from '../../styles/utilities'
 
 type Modifiers = 'large' | 'small'
 
@@ -22,6 +22,13 @@ export const P = styled.p<Props>(
   ({ theme }) => css`
     ${fonts.body()}
     ${applyStyleModifiers(P_MODIFIERS)}
+  `
+)
+
+export const A = styled.a(
+  ({ theme }) => css`
+    display: inline-block;
+    ${spacing.sm('mt')};
   `
 )
 
