@@ -9,10 +9,10 @@ const Page = ({ className, title, content, pagebuilder, ...props }) => {
   return (
     <div className={className}>
       <Container className="Page__container">
-        <header className="Page__header">
+        {/* <header className="Page__header">
           <P>Page</P>
           {title && <H1>{title}</H1>}
-        </header>
+        </header> */}
         {pagebuilder && (
           <div className="Page__content">
             {pagebuilder?.sections && (

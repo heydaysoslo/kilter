@@ -27,7 +27,6 @@ const EditorLink = props => {
 export const serializers = {
   types: {
     block(props) {
-      console.log('block -> props', props)
       if (props.node.children.text && props.node.children.text.length === 0)
         return null
       switch (props.node.style) {
@@ -37,8 +36,8 @@ export const serializers = {
         case 'h3':
           return <H3>{props.children}</H3>
 
-        case 'large':
-          return <P modifiers="large">{props.children}</P>
+        case 'lead':
+          return <P modifiers="lead">{props.children}</P>
 
         case 'small':
           return (

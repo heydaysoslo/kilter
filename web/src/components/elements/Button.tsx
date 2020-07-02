@@ -50,6 +50,7 @@ export default styled(Button)(
     padding: 7px 20px;
     transition: 0.15s ease background-color, color;
     border-radius: 999px;
+    cursor: pointer;
 
     &:hover {
       background-color: ${theme.colors.interactive};

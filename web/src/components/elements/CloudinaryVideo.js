@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useRef, useLayoutEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
+import { nanoid } from 'nanoid'
 
-console.log(process.env)
+import { Button } from '.'
+
+const uniqueId = nanoid(10)
 
 /*
 
@@ -33,9 +36,11 @@ const videoFormats = [
   }
 ]
 
-const getVideoUrl = ({ type, public_id, blur = true }) => {
+const getVideoUrl = ({ type, public_id }, options) => {
   // const dpr = (typeof window !== undefined && window.devicePixelRatio) || 1
-  const transformations = `f_auto,q_auto:best${blur ? ',e_blur:2000' : ''}` // `q_auto:best,dpr_${dpr}`
+  const transformations = `f_auto,q_auto:best${
+    options.blur ? ',e_blur:2000' : ''
+  }` // `q_auto:best,dpr_${dpr}`
   return videoFormats.map(({ ext, format }) => {
     return {
       type: format,
@@ -45,30 +50,68 @@ const getVideoUrl = ({ type, public_id, blur = true }) => {
   })
 }
 
-const CloudinaryVideo = ({ node, className }) => {
-  console.log('CloudinaryVideo -> node', node)
-  const videoUrl = getVideoUrl(node)
+const CloudinaryVideo = ({
+  node,
+  className,
+  options = { blur: true, autoPlay: true }
+}) => {
+  const videoUrl = getVideoUrl(node, options)
+  const player = useRef(null)
+  const [shouldPlay, setShouldPlay] = useState(false)
+
+  useLayoutEffect(() => {
+    if (player?.current && !options.autoPlay) {
+      player.current.play()
+    }
+  }, [shouldPlay])
+
   return (
-    <video
-      className={className}
-      width={node.width}
-      height={node.height}
-      autoPlay
-      loop
-      muted
-      playsInline
-    >
-      {videoUrl.map(({ src, type }) => {
-        return <source key={src} src={src} type={type} />
-      })}
-      Your browser does not support the video tag :(
-    </video>
+    <div className={className}>
+      {!options.autoPlay && !shouldPlay && (
+        <Button onClick={() => setShouldPlay(true)}>Play</Button>
+      )}
+      <video
+        ref={player}
+        width={node.width}
+        height={node.height}
+        autoPlay={options.autoPlay}
+        loop={options.autoPlay}
+        muted={options.autoPlay}
+        controls={!options.autoPlay && shouldPlay}
+        playsInline
+      >
+        {videoUrl.map(({ src, type }) => {
+          return <source key={`${uniqueId}-${src}`} src={src} type={type} />
+        })}
+        Your browser does not support the video tag :(
+      </video>
+    </div>
   )
 }
 
 export default styled(CloudinaryVideo)(
   ({ theme }) => css`
-    width: 100%;
-    height: auto;
+    position: relative;
+    video {
+      width: 100%;
+      height: auto;
+    }
+
+    ${Button} {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      border-radius: 0;
+      border-width: 0;
+      color: ${theme.colors.white};
+
+      &:hover {
+        background: transparent;
+        color: ${theme.colors.white};
+      }
+    }
   `
 )

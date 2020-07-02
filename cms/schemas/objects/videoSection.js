@@ -1,29 +1,26 @@
-import Vimeo from "../../custom/components/Vimeo";
-import MdMovie from "react-icons/lib/md/movie";
+import MdMovie from 'react-icons/lib/md/movie'
 
 export default {
-  name: "videoSection",
-  title: "Video Section",
-  type: "object",
+  name: 'videoSection',
+  title: 'Video Section',
+  type: 'object',
   fields: [
     {
-      name: "video",
-      title: "Video",
-      type: "string",
-      inputComponent: Vimeo
+      name: 'video',
+      title: 'Video',
+      type: 'cloudinarySingleVideo'
     }
   ],
   preview: {
     select: {
-      video: "video"
+      title: 'video.public_id'
     },
-    prepare({ video }) {
-      const data = video && JSON.parse(video);
+    prepare({ title }) {
       return {
-        title: data && data.label ? data.label : "Video",
+        title,
         media: MdMovie,
-        subtitle: "Video section"
-      };
+        subtitle: 'Video section'
+      }
     }
   }
-};
+}

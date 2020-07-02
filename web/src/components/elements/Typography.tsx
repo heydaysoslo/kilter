@@ -1,27 +1,29 @@
 import styled, { css } from 'styled-components'
-import { applyStyleModifiers } from 'styled-components-modifiers'
 
 import { fonts, spacing } from '../../styles/utilities'
 
-type Modifiers = 'large' | 'small'
+type Modifiers = 'lead' | 'small'
 
 type Props = {
   modifiers?: Modifiers | Modifiers[]
 }
 
-const P_MODIFIERS = {
-  large: ({ theme }) => css`
-    font-size: 2rem;
-  `,
-  small: ({ theme }) => css`
-    font-size: 0.8rem;
-  `
-}
-
 export const P = styled.p<Props>(
-  ({ theme }) => css`
+  ({ theme, modifiers }) => css`
     ${fonts.body()}
-    ${applyStyleModifiers(P_MODIFIERS)}
+    ${spacing.sm('mt')};
+
+    ${modifiers === 'small' &&
+      css`
+        ${fonts.body()}
+        ${spacing.sm('mt')};
+      `}
+
+    ${modifiers === 'lead' &&
+      css`
+        ${fonts.h3()}
+        ${spacing.md('mt')};
+      `}
   `
 )
 

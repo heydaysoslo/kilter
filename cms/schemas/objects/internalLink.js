@@ -6,9 +6,22 @@ import { defaultLinkFields } from '../defaults/linkDefaults'
 
 import InternalLinkIcon from 'react-icons/lib/md/link'
 
-const InternalLinkRenderer = props => (
-  <span>{props.linkText || props.children}</span>
-)
+const InternalLinkRenderer = props => {
+  const style =
+    props.linkStyle === 'button'
+      ? {
+          background: 'blue',
+          padding: '10px 20px',
+          color: 'white',
+          borderRadius: '4px'
+        }
+      : {}
+  return (
+    <span style={style}>
+      {props && props.linkText ? props.linkText : props.children}
+    </span>
+  )
+}
 
 export default {
   name: 'internalLink',

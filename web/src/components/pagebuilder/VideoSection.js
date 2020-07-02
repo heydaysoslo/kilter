@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/media-has-caption */
 import React from 'react'
 import styled, { css } from 'styled-components'
+import CloudinaryVideo from '../elements/CloudinaryVideo'
 
 const VideoSection = ({ className, video }) => {
-  const newVideo = video && JSON.parse(video)
   return (
-    <div className={className}>
-      <video controls>
-        <source src={newVideo.value.files[0].link} />
-      </video>
+    <div className={className + ' PageBuilder__item'}>
+      <CloudinaryVideo
+        node={video}
+        options={{ blur: false, autoPlay: false }}
+      />
     </div>
   )
 }

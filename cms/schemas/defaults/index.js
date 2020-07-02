@@ -13,5 +13,15 @@ export default {
     name: 'cldimage',
     title: 'Image',
     type: 'cloudinarySingleImage'
+  },
+  editor: {
+    name: 'editor',
+    title: 'Editor',
+    type: 'editor'
+  },
+  editorMinimal: {
+    name: 'editorMinimal',
+    title: 'Editor Minimal',
+    type: 'editorMinimal'
   }
 }
