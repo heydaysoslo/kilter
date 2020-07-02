@@ -18,7 +18,7 @@ export const colors = {
   interactive: baseColors.brown,
   text: baseColors.black,
   border: baseColors.black,
-  background: 'transparent'
+  background: baseColors.white
 }
 
 export const breakpoints = {
