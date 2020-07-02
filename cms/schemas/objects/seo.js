@@ -1,5 +1,5 @@
 import d from '../defaults'
-console.log(d.image)
+
 export default {
   name: 'seo',
   title: 'Seo',
