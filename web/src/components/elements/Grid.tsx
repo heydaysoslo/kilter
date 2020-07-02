@@ -101,10 +101,8 @@ const setGridItemOffset = ({ offset, theme }) => {
 }
 
 const setAlignItems = ({ align, theme }) => {
-  console.log('setAlignItems -> align', align)
   switch (typeof align) {
     case 'string':
-      console.log(`align-items: ${align};`)
       return css`
         align-items: ${align};
       `
@@ -118,10 +116,8 @@ const setAlignItems = ({ align, theme }) => {
 }
 
 const setJustifyContent = ({ justify, theme }) => {
-  console.log('setAlignItems -> align', justify)
   switch (typeof justify) {
     case 'string':
-      console.log(`justify-content: ${justify};`)
       return css`
         justify-content: ${justify};
       `

@@ -3,7 +3,6 @@ import CloudinaryVideo from '../elements/CloudinaryVideo'
 import CloudinaryImage from '../elements/CloudinaryImage'
 
 const CloudinaryMediaResolver = ({ node, aspectRatio }) => {
-  console.log('CloudinaryMediaResolver -> node', node)
   const isNested = node.hasOwnProperty('image')
   if (
     node?.image?.resource_type === 'image' ||
