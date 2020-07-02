@@ -20,9 +20,9 @@ const MenuItems = ({ menu, closeMenu, className }) => {
         <GridItem span={{ xs: 12, md: 4 }}>
           <Modal
             trigger={(open, setOpen) => (
-              <button className="link" onClick={() => setOpen(true)}>
+              <Trigger className="link" onClick={() => setOpen(!open)}>
                 {open ? 'Close' : 'Registrer interest'}
-              </button>
+              </Trigger>
             )}
             hideClose
           >
@@ -40,6 +40,13 @@ const MenuItems = ({ menu, closeMenu, className }) => {
     </nav>
   )
 }
+
+const Trigger = styled.button(
+  ({ theme }) => css`
+    position: relative;
+    z-index: 9999;
+  `
+)
 
 export default styled(MenuItems)(
   ({ theme }) => css`
