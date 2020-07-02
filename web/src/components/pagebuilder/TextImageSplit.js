@@ -10,8 +10,8 @@ const TextImageSplit = ({
   textOnTheRight = false,
   image,
   aspect,
-  link,
   title,
+  subtitle,
   content,
   className
 }) => {
@@ -27,15 +27,13 @@ const TextImageSplit = ({
       >
         <div className="content">
           {title && <H3>{title}</H3>}
+          {subtitle && <p className="TextImageSplit__subtitle">{subtitle}</p>}
           {content && (
             <Editor className="TextImageSplit__content" blocks={content} />
           )}
-          {link && (
-            <LinkResolver className="TextImageSplit__button" link={link} />
-          )}
         </div>
         <div className="image">
-          <CloudinaryMediaResolver node={image} />
+          <CloudinaryMediaResolver node={image} aspect={aspect} />
         </div>
       </Grid>
     </div>
@@ -44,11 +42,14 @@ const TextImageSplit = ({
 
 export default styled(TextImageSplit)(
   ({ theme }) => css`
-    .TextImageSplit__content {
-      ${spacing.sm('mt')}
-    }
-    .TextImageSplit__button {
-      ${spacing.sm('mt')}
+    .TextImageSplit {
+      &__content {
+        ${spacing.sm('mt')}
+      }
+      &__subtitle {
+        color: ${theme.colors.textGrey};
+        ${spacing.sm('mt')}
+      }
     }
   `
 )
