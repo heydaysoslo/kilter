@@ -4,20 +4,18 @@ import { graphql } from 'gatsby'
 import Layout from '../components/Layout'
 import TemplateResolver from '../components/resolvers/TemplateResolver'
 
-const NewsTemplate = props => {
+const Article = props => {
   const { data } = props
   const article = data && data.article
 
   return (
-    article && (
-      <Layout {...article}>
-        <TemplateResolver page={article} />
-      </Layout>
-    )
+    <Layout {...article}>
+      <TemplateResolver page={article} />
+    </Layout>
   )
 }
 
-export default NewsTemplate
+export default Article
 
 export const query = graphql`
   query NewsQuery($id: String!) {
