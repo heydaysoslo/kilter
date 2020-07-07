@@ -2,21 +2,17 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import Pagebuilder from '../pagebuilder/Pagebuilder'
-import { H1, P, Container } from '../elements'
+import { Container } from '../elements'
 import { spacing } from '../../styles/utilities'
 
-const FrontPage = ({ className, title, content, pagebuilder, ...props }) => {
+const FrontPage = ({ className, title, content, _rawPagebuilder }) => {
   return (
     <div className={className}>
       <Container className="Page__container">
-        {/* <header className="Page__header">
-          <P>FrontPage</P>
-          {title && <H1>{title}</H1>}
-        </header> */}
-        {pagebuilder && (
+        {_rawPagebuilder && (
           <div className="Page__content">
-            {pagebuilder?.sections && (
-              <Pagebuilder sections={pagebuilder.sections} />
+            {_rawPagebuilder?.sections && (
+              <Pagebuilder sections={_rawPagebuilder.sections} />
             )}
           </div>
         )}
