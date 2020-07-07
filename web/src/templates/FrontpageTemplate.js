@@ -7,7 +7,6 @@ import { TemplateResolver } from '../components/resolvers'
 const FrontpageTemplate = props => {
   const { data } = props
   const page = data?.sanityFrontpage
-  console.log('page', page)
   return (
     <Layout page={page}>
       <TemplateResolver page={page} />
@@ -25,7 +24,7 @@ export const frontpageQuery = graphql`
       title
       _type
       template
-      pagebuilder: _rawPagebuilder(resolveReferences: { maxDepth: 20 })
+      _rawPagebuilder(resolveReferences: { maxDepth: 20 })
       seo {
         ...SEO
       }
