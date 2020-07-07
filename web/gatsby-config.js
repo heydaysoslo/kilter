@@ -77,8 +77,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: `https://ablymed.com`,
-        sitemap: `https://ablymed.com/sitemap.xml`,
+        host: `https://kilter.com`,
+        sitemap: `https://kilter.com/sitemap.xml`,
         policy: [{ userAgent: '*', allow: '/' }]
       }
     },
@@ -97,25 +97,16 @@ module.exports = {
         // dataLayerName: "YOUR_DATA_LAYER_NAME",
       }
     },
-    // {
-    //   resolve: 'gatsby-source-vimeo-all',
-    //   options: {
-    //     clientId: process.env.VIMEO_CLIENT_ID,
-    //     clientSecret: process.env.VIMEO_CLIENT_SECRET,
-    //     accessToken: process.env.VIMEO_ACCESS_TOKEN
-    //   }
-    // }
-    // 'gatsby-plugin-extract-image-colors'
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
         icon: `${__dirname}/src/assets/images/favicon.png`,
-        name: 'STARTER',
-        short_name: 'STARTER',
+        name: 'Kilter',
+        short_name: 'Kilter',
         start_url: `/`,
         background_color: `#000`,
         theme_color: `#fff`,
-        display: 'STARTER'
+        display: 'Kilter'
       }
     }
   ]
