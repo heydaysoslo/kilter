@@ -25,7 +25,7 @@ const defaultTrans = {
     duration: 1
   }
 }
-export const transitions = {
+const transitions = {
   fadeInUp: {
     visible: {
       opacity: 1,
