@@ -29,6 +29,15 @@ module.exports = {
     `gatsby-plugin-portal`,
     `gatsby-plugin-typescript`,
     {
+      resolve: 'gatsby-plugin-webpack-bundle-analyzer',
+      // Available options: https://github.com/webpack-contrib/webpack-bundle-analyzer#options-for-plugin
+      options: {
+        openAnalyzer: true,
+        analyzerPort: 5000,
+        production: true
+      }
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
