@@ -1,4 +1,5 @@
-import React, { Suspense } from 'react'
+import React from 'react'
+import loadable from '@loadable/component'
 
 import Header from './Header'
 import Footer from './Footer'
@@ -7,7 +8,7 @@ import { ThemeProvider } from 'styled-components'
 import theme from '../styles/themes'
 import { GlobalStyle } from '../styles/utilities/Global'
 
-const GridToggler = React.lazy(() => import('./elements/GridToggler'))
+const GridToggler = loadable(() => import('./elements/GridToggler'))
 
 const Layout = ({ page, children }) => {
   return (
@@ -18,9 +19,7 @@ const Layout = ({ page, children }) => {
         <div className="Site__content">{children}</div>
         <Footer />
         <GlobalStyle />
-        <Suspense fallback="">
-          {process.env.NODE_ENV === 'development' && <GridToggler />}
-        </Suspense>
+        {process.env.NODE_ENV === 'development' && <GridToggler />}
       </div>
     </ThemeProvider>
   )
