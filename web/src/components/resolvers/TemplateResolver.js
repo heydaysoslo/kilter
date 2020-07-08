@@ -29,7 +29,7 @@ export default function TemplateResolver({ page }) {
     import(`../pages/${temp}`)
       .then(comp => setComponent(() => comp.default))
       .catch(err => console.log(err))
-  }, [])
+  }, [page])
 
   if (!Component)
     return <div style={{ minHeight: '100vh', background: 'orange' }} />
