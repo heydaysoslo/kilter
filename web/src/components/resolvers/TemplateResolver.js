@@ -31,8 +31,7 @@ export default function TemplateResolver({ page }) {
       .catch(err => console.log(err))
   }, [page])
 
-  if (!Component)
-    return <div style={{ minHeight: '100vh', background: 'orange' }} />
+  if (!Component) return <div style={{ minHeight: '100vh' }} />
 
   return <Component {...page} />
 }
