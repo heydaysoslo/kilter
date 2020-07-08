@@ -58,7 +58,7 @@ const CloudinaryVideo = ({
 
   useLayoutEffect(() => {
     if (player?.current && !options.autoPlay) {
-      player.current.play()
+      // player.current.play()
     }
   }, [shouldPlay, options])
 
