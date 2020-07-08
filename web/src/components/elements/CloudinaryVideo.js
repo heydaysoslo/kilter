@@ -1,10 +1,7 @@
 import React, { useRef, useLayoutEffect, useState } from 'react'
 import styled, { css } from 'styled-components'
-import { nanoid } from 'nanoid'
 
 import { Button } from '.'
-
-const uniqueId = nanoid(10)
 
 /*
 
@@ -63,7 +60,7 @@ const CloudinaryVideo = ({
     if (player?.current && !options.autoPlay) {
       player.current.play()
     }
-  }, [shouldPlay])
+  }, [shouldPlay, options])
 
   return (
     <div className={className}>
@@ -81,7 +78,7 @@ const CloudinaryVideo = ({
         playsInline
       >
         {videoUrl.map(({ src, type }) => {
-          return <source key={`${uniqueId}-${src}`} src={src} type={type} />
+          return <source key={`${type}-${src}`} src={src} type={type} />
         })}
         Your browser does not support the video tag :(
       </video>
