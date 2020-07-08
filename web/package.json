@@ -41,7 +41,7 @@
     "dotenv": "^8.0.0",
     "flickity": "^2.2.1",
     "formik": "^1.5.8",
-    "framer-motion": "^1.7.2",
+    "framer-motion": "2.0.0-beta.77",
     "gatsby": "^2.23.22",
     "gatsby-plugin-favicon": "^3.1.6",
     "gatsby-plugin-google-tagmanager": "^2.1.8",
@@ -55,6 +55,7 @@
     "gatsby-plugin-sitemap": "^2.2.10",
     "gatsby-plugin-styled-components": "^3.1.17",
     "gatsby-plugin-typescript": "^2.1.26",
+    "gatsby-plugin-webpack-bundle-analyzer": "^1.0.5",
     "gatsby-source-filesystem": "^2.1.19",
     "gatsby-source-sanity": "^5.0.5",
     "intersection-observer": "^0.11.0",
@@ -71,7 +72,6 @@
     "styled-components": "^5.0.0",
     "styled-components-modifiers": "^1.2.5",
     "styled-components-spacing": "^3.1.0",
-    "styled-icons": "^9.4.1",
     "yup": "^0.27.0"
   },
   "devDependencies": {
