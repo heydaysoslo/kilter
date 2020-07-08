@@ -16,15 +16,8 @@ import { TemplateResolver } from '../components/resolvers'
 const PageTemplate = props => {
   const { data } = props
   const page = data && data?.page
-  console.log('page', page)
 
-  return (
-    page && (
-      <Layout {...page}>
-        <TemplateResolver page={page} />
-      </Layout>
-    )
-  )
+  return page && <TemplateResolver page={page} />
 }
 
 export default PageTemplate
@@ -40,7 +33,9 @@ export const query = graphql`
     title
     _type
     template
-    _rawSlug(resolveReferences: { maxDepth: 20 })
+    slug {
+      current
+    }
     pagebuilder: _rawPagebuilder(resolveReferences: { maxDepth: 20 })
     seo {
       ...SEO

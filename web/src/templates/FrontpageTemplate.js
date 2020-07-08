@@ -7,11 +7,7 @@ import { TemplateResolver } from '../components/resolvers'
 const FrontpageTemplate = props => {
   const { data } = props
   const page = data?.sanityFrontpage
-  return (
-    <Layout page={page}>
-      <TemplateResolver page={page} />
-    </Layout>
-  )
+  return <TemplateResolver page={page} />
 }
 
 export default FrontpageTemplate
