@@ -6,8 +6,11 @@
 
 // You can delete this file if you're not using it
 import React from 'react'
-import { AppProvider } from './src/components/context/AppContext'
 import 'intersection-observer'
+import { motion, AnimateSharedLayout, AnimatePresence } from 'framer-motion'
+
+import { AppProvider } from './src/components/context/AppContext'
+import Layout from './src/components/Layout'
 
 import './src/styles/reset.css'
 import './src/assets/fonts/fonts.css'
@@ -15,3 +18,19 @@ import './src/assets/fonts/fonts.css'
 export const wrapRootElement = ({ element }) => (
   <AppProvider>{element}</AppProvider>
 )
+
+export const wrapPageElement = ({ element, props }) => {
+  // props provide same data to Layout as Page element will get
+  // including location, data, etc - you don't need to pass it
+  return (
+    <AnimateSharedLayout type="crossfade">
+      <AnimatePresence exitBeforeEnter>
+        <motion.div key={props.path}>
+          <Layout {...props} page={props.data.page}>
+            {element}
+          </Layout>
+        </motion.div>
+      </AnimatePresence>
+    </AnimateSharedLayout>
+  )
+}
