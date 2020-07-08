@@ -2,11 +2,13 @@ import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import styled from 'styled-components'
 import { spacing } from '../styles/utilities'
+import { motion } from 'framer-motion'
 
 import { Grid, Container } from './elements'
 import Newsletter from './Newsletter'
 import { LinkResolver } from './resolvers'
 import Social from './Social'
+import { transitions } from '../utils/animation'
 
 const StyledFooter = styled.footer`
   ${spacing.section('mt,py')};
@@ -18,32 +20,63 @@ const Footer = () => {
   const menu = data?.sanitySiteSettings?.footerMenu?._rawItem
   const privacyPage = data?.sanitySiteSettings?._rawPrivacypage
   return (
-    <StyledFooter>
+    <StyledFooter
+      as={motion.footer}
+      variants={{
+        initial: transitions.fadeInUp.initial,
+        animate: {
+          ...transitions.fadeInUp.animate,
+          transition: transitions.stagger
+        }
+      }}
+      initial="initial"
+      animate="animate"
+      exit="initial"
+    >
       <Container>
         <Grid gap="my" columns={{ sm: 2, md: 4 }}>
-          <ul className="Footer__menu">
+          <motion.ul
+            className="Footer__menu"
+            variants={transitions.stagger}
+            initial="initial"
+            animate="animate"
+            exit="initial"
+          >
             {menu &&
               menu.map(item => (
-                <li className="Footer__menu-item" key={item._key}>
+                <motion.li
+                  className="Footer__menu-item"
+                  key={item._key}
+                  variants={transitions.fadeInUp}
+                >
                   <LinkResolver link={item}>
                     {item?.title || item?.reference?.title}
                   </LinkResolver>
-                </li>
+                </motion.li>
               ))}
-          </ul>
-          <div className="Footer__social">
+          </motion.ul>
+          <motion.div
+            variants={transitions.fadeInUp}
+            className="Footer__social"
+          >
             <Social />
-          </div>
-          <div className="Footer__privacy">
+          </motion.div>
+          <motion.div
+            variants={transitions.fadeInUp}
+            className="Footer__privacy"
+          >
             {privacyPage && (
               <LinkResolver link={privacyPage}>
                 {privacyPage.title}
               </LinkResolver>
             )}
-          </div>
-          <div className="Footer__newsletter">
+          </motion.div>
+          <motion.div
+            variants={transitions.fadeInUp}
+            className="Footer__newsletter"
+          >
             <Newsletter />
-          </div>
+          </motion.div>
         </Grid>
       </Container>
     </StyledFooter>
