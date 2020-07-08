@@ -1,5 +1,6 @@
 import React from 'react'
 import loadable from '@loadable/component'
+import { motion } from 'framer-motion'
 
 import CardSection from './CardSection'
 import TextSection from './TextSection'
@@ -10,6 +11,7 @@ import VideoSection from './VideoSection'
 import Tabs from '../elements/Tabs'
 import styled from 'styled-components'
 import { spacing } from '../../styles/utilities'
+import { transitions } from '../../utils/animation'
 
 const CarouselSection = loadable(() => import('./CarouselSection'))
 
@@ -24,7 +26,7 @@ const sectionTypes = {
   videoSection: VideoSection
 }
 
-const StyledPageBuilder = styled.div`
+const StyledPageBuilder = styled(motion.div)`
   .PageBuilder__item {
     ${spacing.section('mt')};
   }
@@ -32,16 +34,23 @@ const StyledPageBuilder = styled.div`
 
 const PageBuilder = ({ sections }) => {
   return (
-    <StyledPageBuilder>
+    <StyledPageBuilder
+      variants={transitions.stagger}
+      initial="initial"
+      animate="animate"
+      exit="initial"
+    >
       {sections.map((section, index) => {
         const Component = sectionTypes[section._type] || null
         return Component ? (
           <div key={section._key}>
-            <Component
-              {...section}
-              prevComp={sections[index - 1] ? sections[index - 1] : null}
-              nextComp={sections[index + 1] ? sections[index + 1] : null}
-            />
+            <motion.div variants={transitions.fadeInUp} exit="initial">
+              <Component
+                {...section}
+                prevComp={sections[index - 1] ? sections[index - 1] : null}
+                nextComp={sections[index + 1] ? sections[index + 1] : null}
+              />
+            </motion.div>
           </div>
         ) : (
           <p key={section._key} style={{ background: 'yellow' }}>

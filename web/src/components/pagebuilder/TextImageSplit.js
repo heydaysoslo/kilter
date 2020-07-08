@@ -1,10 +1,12 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 
 import Editor from '../editor/'
-import { LinkResolver, CloudinaryMediaResolver } from '../resolvers'
+import { CloudinaryMediaResolver } from '../resolvers'
 import { H3, Grid } from '../elements'
 import styled, { css } from 'styled-components'
 import { spacing } from '../../styles/utilities'
+import { transitions } from '../../utils/animation'
 
 const TextImageSplit = ({
   textOnTheRight = false,
@@ -15,7 +17,6 @@ const TextImageSplit = ({
   content,
   className
 }) => {
-  console.log('image', image)
   if (!image && !title) return null
   return (
     <div className={className}>
@@ -25,16 +26,39 @@ const TextImageSplit = ({
         gap={true}
         align="center"
       >
-        <div className="content">
-          {title && <H3>{title}</H3>}
-          {subtitle && <p className="TextImageSplit__subtitle">{subtitle}</p>}
-          {content && (
-            <Editor className="TextImageSplit__content" blocks={content} />
+        <motion.div
+          className="content"
+          variants={transitions.stagger}
+          initial="initial"
+          animate="animate"
+          exit="initial"
+        >
+          {title && (
+            <H3 as={motion.h3} variants={transitions.fadeInUp}>
+              {title}
+            </H3>
           )}
-        </div>
-        <div className="image">
+          {subtitle && (
+            <motion.p
+              variants={transitions.fadeInUp}
+              className="TextImageSplit__subtitle"
+            >
+              {subtitle}
+            </motion.p>
+          )}
+          {content && (
+            <motion.div variants={transitions.fadeInUp}>
+              <Editor className="TextImageSplit__content" blocks={content} />
+            </motion.div>
+          )}
+        </motion.div>
+        <motion.div
+          className="image"
+          whileHover={{ scale: 1.1 }}
+          {...transitions.fadeIn}
+        >
           <CloudinaryMediaResolver node={image} aspect={aspect} />
-        </div>
+        </motion.div>
       </Grid>
     </div>
   )
