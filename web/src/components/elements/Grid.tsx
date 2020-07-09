@@ -31,18 +31,7 @@ type GridItemProps = {
 
 const BaseGrid: React.FC<Props> = ({ className, children }) => {
   if (!children) return null
-  return (
-    <div className={className}>
-      {/* TODO: Fix the any type */}
-      {React.Children.map(children, (child: any, i: number) => {
-        if (child?.type?.target?.name === 'BaseGridItem') {
-          return child
-        } else {
-          return <GridItem key={`Grid__item-${i}`}>{child}</GridItem>
-        }
-      })}
-    </div>
-  )
+  return <div className={className}>{children}</div>
 }
 
 const BaseGridItem: React.FC<GridItemProps> = ({ children, className }) => {
