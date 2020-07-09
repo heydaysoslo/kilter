@@ -7,7 +7,7 @@ import Portal from '../Portal'
 import { Button } from '.'
 import styled, { css } from 'styled-components'
 import { bp, color } from '../../styles/utilities'
-import { transitions } from './AnimateInView'
+import { transitions } from '../../utils/animation'
 
 const modalId = nanoid(10)
 
@@ -15,7 +15,7 @@ const Modal = ({
   trigger,
   children,
   hideClose,
-  contentMaxWidth,
+  contentMaxWidth = '50vw',
   className
 }) => {
   const [open, setOpen] = useState(false)
@@ -41,19 +41,9 @@ const Modal = ({
           <Portal>
             <motion.div
               key={`modal-${modalId}`}
-              initial={transitions.fadeIn.hidden}
-              animate={{
-                ...transitions.fadeIn.visible,
-                transition: {
-                  duration: 0.25
-                }
-              }}
-              exit={{
-                ...transitions.fadeIn.hidden,
-                transition: {
-                  duration: 0.25
-                }
-              }}
+              initial={transitions.fadeIn.initial}
+              animate={transitions.fadeIn.animate}
+              exit={transitions.fadeIn.initial}
               className={className}
             >
               <div
@@ -65,7 +55,7 @@ const Modal = ({
               >
                 <div className="Modal__backdrop" />
                 <div className="Modal__container">
-                  <div
+                  <motion.div
                     ref={content}
                     style={
                       contentMaxWidth && {
@@ -73,13 +63,17 @@ const Modal = ({
                         width: '100%'
                       }
                     }
+                    variants={transitions.stagger}
+                    initial="initial"
+                    animate="animate"
+                    exit="initial"
                     className="Modal__content"
                   >
                     {children({
                       close: () => setOpen(false),
                       isOpen: open
                     })}
-                  </div>
+                  </motion.div>
                 </div>
                 {!hideClose && (
                   <Button
@@ -118,6 +112,9 @@ export default styled(Modal)(
       height: 100%;
       left: 0;
       top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
 
       /* Vertical alignment fix */
       &:before {
