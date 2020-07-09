@@ -2,7 +2,7 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 
 import Pagebuilder from '../pagebuilder/Pagebuilder'
-import { H1, P, Container } from '../elements'
+import { Container } from '../elements'
 import { spacing } from '../../styles/utilities'
 
 const Page = ({ className, title, content, pagebuilder, ...props }) => {

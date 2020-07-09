@@ -7,7 +7,7 @@ import MenuItems from './MenuItems'
 import Portal from './Portal'
 import styled, { css } from 'styled-components'
 import { spacing, bp } from '../styles/utilities'
-import { Button, Container } from './elements'
+import { Container } from './elements'
 import Hamburger from './elements/Hamburger'
 
 const Menu = ({ className }) => {
