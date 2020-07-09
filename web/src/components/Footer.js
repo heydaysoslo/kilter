@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { spacing } from '../styles/utilities'
 import { motion } from 'framer-motion'
 
-import { Grid, Container } from './elements'
+import { Grid, Container, GridItem } from './elements'
 import Newsletter from './Newsletter'
 import { LinkResolver } from './resolvers'
 import Social from './Social'
@@ -35,48 +35,56 @@ const Footer = () => {
     >
       <Container>
         <Grid gap="my" columns={{ sm: 2, md: 4 }}>
-          <motion.ul
-            className="Footer__menu"
-            variants={transitions.stagger}
-            initial="initial"
-            animate="animate"
-            exit="initial"
-          >
-            {menu &&
-              menu.map(item => (
-                <motion.li
-                  className="Footer__menu-item"
-                  key={item._key}
-                  variants={transitions.fadeInUp}
-                >
-                  <LinkResolver link={item}>
-                    {item?.title || item?.reference?.title}
-                  </LinkResolver>
-                </motion.li>
-              ))}
-          </motion.ul>
-          <motion.div
-            variants={transitions.fadeInUp}
-            className="Footer__social"
-          >
-            <Social />
-          </motion.div>
-          <motion.div
-            variants={transitions.fadeInUp}
-            className="Footer__privacy"
-          >
-            {privacyPage && (
-              <LinkResolver link={privacyPage}>
-                {privacyPage.title}
-              </LinkResolver>
-            )}
-          </motion.div>
-          <motion.div
-            variants={transitions.fadeInUp}
-            className="Footer__newsletter"
-          >
-            <Newsletter />
-          </motion.div>
+          <GridItem span={{ xs: 6, md: 3 }}>
+            <motion.ul
+              className="Footer__menu"
+              variants={transitions.stagger}
+              initial="initial"
+              animate="animate"
+              exit="initial"
+            >
+              {menu &&
+                menu.map(item => (
+                  <motion.li
+                    className="Footer__menu-item"
+                    key={item._key}
+                    variants={transitions.fadeInUp}
+                  >
+                    <LinkResolver link={item}>
+                      {item?.title || item?.reference?.title}
+                    </LinkResolver>
+                  </motion.li>
+                ))}
+            </motion.ul>
+          </GridItem>
+          <GridItem span={{ xs: 6, md: 3 }}>
+            <motion.div
+              variants={transitions.fadeInUp}
+              className="Footer__social"
+            >
+              <Social />
+            </motion.div>
+          </GridItem>
+          <GridItem span={{ xs: 6, md: 3 }}>
+            <motion.div
+              variants={transitions.fadeInUp}
+              className="Footer__privacy"
+            >
+              {privacyPage && (
+                <LinkResolver link={privacyPage}>
+                  {privacyPage.title}
+                </LinkResolver>
+              )}
+            </motion.div>
+          </GridItem>
+          <GridItem span={{ xs: 6, md: 3 }}>
+            <motion.div
+              variants={transitions.fadeInUp}
+              className="Footer__newsletter"
+            >
+              <Newsletter />
+            </motion.div>
+          </GridItem>
         </Grid>
       </Container>
     </StyledFooter>

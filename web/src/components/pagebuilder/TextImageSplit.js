@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 import Editor from '../editor/'
 import { CloudinaryMediaResolver } from '../resolvers'
-import { H3, Grid } from '../elements'
+import { H3, Grid, GridItem } from '../elements'
 import styled, { css } from 'styled-components'
 import { spacing } from '../../styles/utilities'
 import { transitions } from '../../utils/animation'
@@ -26,39 +26,43 @@ const TextImageSplit = ({
         gap={true}
         align="center"
       >
-        <motion.div
-          className="content"
-          variants={transitions.stagger}
-          initial="initial"
-          animate="animate"
-          exit="initial"
-        >
-          {title && (
-            <H3 as={motion.h3} variants={transitions.fadeInUp}>
-              {title}
-            </H3>
-          )}
-          {subtitle && (
-            <motion.p
-              variants={transitions.fadeInUp}
-              className="TextImageSplit__subtitle"
-            >
-              {subtitle}
-            </motion.p>
-          )}
-          {content && (
-            <motion.div variants={transitions.fadeInUp}>
-              <Editor className="TextImageSplit__content" blocks={content} />
-            </motion.div>
-          )}
-        </motion.div>
-        <motion.div
-          className="image"
-          whileHover={{ scale: 1.1 }}
-          {...transitions.fadeIn}
-        >
-          <CloudinaryMediaResolver node={image} aspect={aspect} />
-        </motion.div>
+        <GridItem span={{ xs: 12, md: 6 }}>
+          <motion.div
+            className="content"
+            variants={transitions.stagger}
+            initial="initial"
+            animate="animate"
+            exit="initial"
+          >
+            {title && (
+              <H3 as={motion.h3} variants={transitions.fadeInUp}>
+                {title}
+              </H3>
+            )}
+            {subtitle && (
+              <motion.p
+                variants={transitions.fadeInUp}
+                className="TextImageSplit__subtitle"
+              >
+                {subtitle}
+              </motion.p>
+            )}
+            {content && (
+              <motion.div variants={transitions.fadeInUp}>
+                <Editor className="TextImageSplit__content" blocks={content} />
+              </motion.div>
+            )}
+          </motion.div>
+        </GridItem>
+        <GridItem span={{ xs: 12, md: 6 }}>
+          <motion.div
+            className="image"
+            whileHover={{ scale: 1.1 }}
+            {...transitions.fadeIn}
+          >
+            <CloudinaryMediaResolver node={image} aspect={aspect} />
+          </motion.div>
+        </GridItem>
       </Grid>
     </div>
   )
