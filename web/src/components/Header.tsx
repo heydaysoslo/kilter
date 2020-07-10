@@ -53,6 +53,7 @@ const Header = ({ className }: Props) => {
 export default styled(Header)(
   ({ theme }) => css`
     ${spacing.sm('py')};
+    ${spacing.lg('mb')};
 
     .logo {
       display: inline-block;

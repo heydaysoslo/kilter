@@ -87,7 +87,8 @@ export const responsiveFonts = {
   small: '14px/1.4',
   body: '18px/1.5',
   h1: {
-    xs: '42px/1.4'
+    xs: '30px/1.4',
+    md: '42px/1.4'
   },
   h2: {
     xs: '26px/1.4'
@@ -150,43 +151,14 @@ export const theme: DefaultTheme = {
   border
 }
 
-export const darkTheme = {
+export const lightTheme = {
   ...theme,
   colors: {
-    primary: 'green',
-    secondary: 'orange',
-    text: 'white',
-    border: 'red',
-    background: '#b2b2b2'
-  },
-  grid: {
-    columns: 24
-  },
-  spacingUnit: {
-    xs: remSize(15),
-    sm: remSize(110),
-    md: remSize(115),
-    lg: remSize(140),
-    xl: remSize(180),
-    section: remSize(1160),
-    gutter: remSize(30)
-  },
-  breakpoints: {
-    xs: 0,
-    sm: 200,
-    md: 400,
-    lg: 600,
-    xl: 800,
-    xxl: 900
-  },
-  defaultStyle: ({ theme }) => css`
-    html {
-      font-size: 75%;
-    }
-    body {
-      background: ${theme?.colors?.background};
-    }
-  `
+    ...theme.colors,
+    text: baseColors.white,
+    interactive: baseColors.white,
+    border: baseColors.white
+  }
 }
 
 export default theme

@@ -28,40 +28,42 @@ const getImageSrc = ({ public_id, format }, aspectRatio) => {
     return {
       empty: `data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7`,
       lqip: `data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7`,
-      srcset: `https://res.cloudinary.com/handsomefrank/image/upload/${public_id}.${format}`,
-      noscript: `https://res.cloudinary.com/handsomefrank/image/upload/${public_id}.${format}`
+      srcset: `https://res.cloudinary.com/mikemike/image/upload/${public_id}.${format}`,
+      noscript: `https://res.cloudinary.com/mikemike/image/upload/${public_id}.${format}`
     }
   }
 
   return {
     empty: `data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7`,
     lqip: `data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7`,
-    // lqip: `https://res.cloudinary.com/handsomefrank/image/upload/w_1,f_auto${
+    // lqip: `https://res.cloudinary.com/mikemike/image/upload/w_1,f_auto${
     //   aspectRatio ? `,ar_${getAspect(aspectRatio)},c_fill` : ''
     // }/${public_id}`,
     srcset: `
-      https://res.cloudinary.com/handsomefrank/image/upload/${transformations},w_256/${public_id} 256w,
-      https://res.cloudinary.com/handsomefrank/image/upload/${transformations},w_512/${public_id} 512w,
-      https://res.cloudinary.com/handsomefrank/image/upload/${transformations},w_768/${public_id} 768w,
-      https://res.cloudinary.com/handsomefrank/image/upload/${transformations},w_1024/${public_id} 1024w,
-      https://res.cloudinary.com/handsomefrank/image/upload/${transformations},w_1280/${public_id} 1280w
+      https://res.cloudinary.com/mikemike/image/upload/${transformations},w_256/${public_id} 256w,
+      https://res.cloudinary.com/mikemike/image/upload/${transformations},w_512/${public_id} 512w,
+      https://res.cloudinary.com/mikemike/image/upload/${transformations},w_768/${public_id} 768w,
+      https://res.cloudinary.com/mikemike/image/upload/${transformations},w_1024/${public_id} 1024w,
+      https://res.cloudinary.com/mikemike/image/upload/${transformations},w_1280/${public_id} 1280w
     `,
-    noscript: `https://res.cloudinary.com/handsomefrank/image/upload/${transformations},w_1280/${public_id}`
+    noscript: `https://res.cloudinary.com/mikemike/image/upload/${transformations},w_1280/${public_id}`
   }
 }
 
 const CloudinaryImage = ({ node, className, aspectRatio = null }) => {
-  // console.log('CloudinaryImage -> node', node.image)
   if (!node) {
     return null
   }
   // Set aspect ratio as style prop to prevent generating a class for every ratio
   const originalRatio =
-    node?.aspectRatio || node?.image?.aspectRatio || node?.aspect_ratio || null
+    node?.aspectRatio ||
+    node?.cldimage?.aspectRatio ||
+    node?.aspect_ratio ||
+    null
   const passedRatio = aspectRatio && getAspect(aspectRatio)
   // Get the passed ratio first, then fallback to image original ratio
   const ratioValue = passedRatio || originalRatio
-  const src = getImageSrc(node?.image ? node.image : node, ratioValue)
+  const src = getImageSrc(node?.cldimage ? node.cldimage : node, ratioValue)
   const ratioStyle = ratioValue
     ? { paddingBottom: `${100 / ratioValue}%` }
     : null

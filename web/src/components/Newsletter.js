@@ -2,8 +2,8 @@ import React from 'react'
 import { Formik } from 'formik'
 
 import { newsletterSchema, createDefaultValues } from '../utils/validation'
-import Input from './elements/Input'
-import { Button } from './elements'
+import { Button, Input, Checkbox } from './elements'
+import { FormBlock } from './elements/Form'
 
 const Newsletter = props => {
   const {
@@ -19,7 +19,8 @@ const Newsletter = props => {
     // handleChange,
     // handleBlur,
     handleSubmit,
-    handleReset
+    handleReset,
+    concentText
   } = props
   return (
     <form className="Form" onSubmit={handleSubmit}>
@@ -32,29 +33,40 @@ const Newsletter = props => {
             touched={touched}
           />
           <Input
+            name="company"
+            placeholder="Enter company name"
+            errors={errors}
+            touched={touched}
+          />
+          <Input
             name="email"
             type="email"
             placeholder="Enter email"
             errors={errors}
             touched={touched}
           />
-          <Input
+          <Checkbox
             name="concent"
             type="checkbox"
-            placeholder="Enter email"
             errors={errors}
             touched={touched}
-          />
-          <Button
-            onClick={handleReset}
-            disabled={!dirty || isSubmitting}
-            variant="secondary"
+            disabled={isSubmitting || (status === 'success' && !isSubmitting)}
+            state={values.concent}
           >
-            Reset
-          </Button>
-          <Button type="submit" disabled={isSubmitting} variant="primary">
-            {isSubmitting ? 'Submitting…' : 'Submit'}
-          </Button>
+            {concentText}
+          </Checkbox>
+          {/* <Button
+              onClick={handleReset}
+              disabled={!dirty || isSubmitting}
+              variant="secondary"
+            >
+              Reset
+            </Button> */}
+          <FormBlock>
+            <Button type="submit" disabled={isSubmitting} variant="primary">
+              {isSubmitting ? 'Submitting…' : 'Submit'}
+            </Button>
+          </FormBlock>
         </>
       )}
       {status === 'error' && (
@@ -77,7 +89,7 @@ const Newsletter = props => {
   )
 }
 
-const NewsletterWrapper = () => {
+const NewsletterWrapper = ({ concentText = 'Agree please' }) => {
   // Create default values for all inputs described in schema for reset to work
   const defaultValues = createDefaultValues(newsletterSchema)
   return (
@@ -104,7 +116,7 @@ const NewsletterWrapper = () => {
         }}
         validationSchema={newsletterSchema}
       >
-        {props => <Newsletter {...props} />}
+        {props => <Newsletter {...props} concentText={concentText} />}
       </Formik>
     </div>
   )

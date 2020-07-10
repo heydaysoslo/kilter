@@ -5,7 +5,7 @@ import Pagebuilder from '../pagebuilder/Pagebuilder'
 import { Container } from '../elements'
 import { spacing } from '../../styles/utilities'
 
-const FrontPage = ({ className, title, content, _rawPagebuilder }) => {
+const FrontPage = ({ className, _rawPagebuilder }) => {
   return (
     <div className={className}>
       <Container className="Page__container">

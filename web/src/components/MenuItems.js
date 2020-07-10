@@ -1,9 +1,10 @@
 import React from 'react'
-import styled, { css } from 'styled-components'
+import styled, { css, ThemeProvider } from 'styled-components'
 
 import { LinkResolver } from './resolvers'
 import NewsletterWrapper from './Newsletter'
 import { Modal, Grid, GridItem } from './elements'
+import { lightTheme } from '../styles/themes'
 
 const MenuItems = ({ menu, closeMenu, className }) => {
   if (!menu) return null
@@ -28,7 +29,9 @@ const MenuItems = ({ menu, closeMenu, className }) => {
           >
             {({ close }) => (
               <>
-                <NewsletterWrapper />
+                <ThemeProvider theme={lightTheme}>
+                  <NewsletterWrapper concentText="Agree to our privacy things please" />
+                </ThemeProvider>
                 <button label="modal" onClick={close}>
                   Close
                 </button>

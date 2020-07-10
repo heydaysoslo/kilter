@@ -42,7 +42,7 @@ const getVideoUrl = ({ type, public_id }, options) => {
     return {
       type: format,
       ext,
-      src: `https://res.cloudinary.com/mikemike/video/${type}/${transformations}/${public_id}`
+      src: `https://res.cloudinary.com/mikemike/video/${type}/${transformations}/${public_id}.${ext}`
     }
   })
 }
@@ -52,7 +52,7 @@ const CloudinaryVideo = ({
   className,
   options = { blur: true, autoPlay: true }
 }) => {
-  const videoUrl = getVideoUrl(node, options)
+  const videoUrl = node ? getVideoUrl(node, options) : ''
   const player = useRef(null)
   const [shouldPlay, setShouldPlay] = useState(false)
 
@@ -61,6 +61,8 @@ const CloudinaryVideo = ({
       // player.current.play()
     }
   }, [shouldPlay, options])
+
+  if (!node) return null
 
   return (
     <div className={className}>

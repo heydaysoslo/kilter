@@ -1,19 +1,14 @@
 import FaFileText from 'react-icons/lib/fa/file-text-o'
+import d from '../defaults'
 
 export default {
   name: 'textSection',
   title: 'Text Section',
   type: 'object',
-  fields: [
-    {
-      name: 'body',
-      title: 'Body',
-      type: 'editor'
-    }
-  ],
+  fields: [d.editor],
   preview: {
     select: {
-      content: 'body'
+      content: 'editor'
     },
     prepare({ content }) {
       const text =

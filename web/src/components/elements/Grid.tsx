@@ -7,20 +7,21 @@ import {
   ResonsiveFlexBoxAlignItems,
   ResonsiveFlexBoxJustifyContent,
   ResponsiveColumns,
-  ResponsiveReverse,
+  FlexBoxDirection,
+  ResponsiveFlexBoxDirection,
   SpacingUnits
 } from '../../types'
 
 type Props = {
   className?: string
   columns?: ResponsiveColumns | number // This will override span in GridItem
-  reverse?: ResponsiveReverse | boolean
   align?: ResonsiveFlexBoxAlignItems | FlexBoxAlignItems
   justify?: ResonsiveFlexBoxJustifyContent | FlexBoxJustifyContent
   gapUnit?: SpacingUnits
   gap?: object | boolean
   gapY?: object | boolean
   gapX?: object | boolean
+  direction: FlexBoxDirection | ResponsiveFlexBoxDirection
 }
 
 type GridItemProps = {
@@ -177,10 +178,19 @@ const setResponsiveGaps = ({ gap, cssProps, multiplier }) => {
 }
 
 export default styled(BaseGrid)<Props>(
-  ({ columns, gap, gapY, gapX, reverse, align, justify, theme }) => css`
+  ({
+    columns,
+    gap,
+    gapY,
+    gapX,
+    direction = 'row',
+    align,
+    justify,
+    theme
+  }) => css`
     display: flex;
     flex: 0 1 auto;
-    flex-direction: ${reverse ? 'row-reverse' : 'row'};
+    flex-direction: ${direction};
     flex-wrap: wrap;
     justify-content: ${justify ? justify : 'flex-start'};
     min-height: 0;

@@ -8,6 +8,7 @@ import { Button } from '.'
 import styled, { css } from 'styled-components'
 import { bp, color } from '../../styles/utilities'
 import { transitions } from '../../utils/animation'
+import CloudinaryVideo from './CloudinaryVideo'
 
 const modalId = nanoid(10)
 
@@ -41,10 +42,9 @@ const Modal = ({
           <Portal>
             <motion.div
               key={`modal-${modalId}`}
-              initial={transitions.fadeIn.initial}
-              animate={transitions.fadeIn.animate}
-              exit={transitions.fadeIn.initial}
               className={className}
+              {...transitions.fadeIn}
+              exit={transitions.fadeIn.initial}
             >
               <div
                 role="button"
@@ -53,7 +53,15 @@ const Modal = ({
                 onKeyDown={outsideClick}
                 className="Modal"
               >
-                <div className="Modal__backdrop" />
+                <div className="Modal__backdrop">
+                  <CloudinaryVideo
+                    node={{
+                      type: 'upload',
+                      public_id:
+                        '/v1594293320/Nature%20videos/Beautiful_Yellow_Flower_And_A_Butterfly_j7msky'
+                    }}
+                  />
+                </div>
                 <div className="Modal__container">
                   <motion.div
                     ref={content}
@@ -112,9 +120,6 @@ export default styled(Modal)(
       height: 100%;
       left: 0;
       top: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
 
       /* Vertical alignment fix */
       &:before {
@@ -141,8 +146,14 @@ export default styled(Modal)(
       left: 0;
       width: 100%;
       height: 100%;
+      min-height: 100vh;
       background: ${color.rgba(theme.colors.background, 0.95)};
       z-index: 0;
+
+      video {
+        min-height: 100vh;
+        width: auto;
+      }
     }
 
     .Modal__close {

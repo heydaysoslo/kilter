@@ -1,72 +1,84 @@
 import React from 'react'
-import { motion } from 'framer-motion'
 
 import Editor from '../editor/'
 import { CloudinaryMediaResolver } from '../resolvers'
-import { H3, Grid, GridItem } from '../elements'
+import { H3, P, Grid, GridItem, Stagger, Animate } from '../elements'
 import styled, { css } from 'styled-components'
 import { spacing } from '../../styles/utilities'
-import { transitions } from '../../utils/animation'
 
-const TextImageSplit = ({
+const TextImageSplit = props => {
+  const {
+    textOnTheRight = false,
+    image,
+    aspect,
+    title,
+    subtitle,
+    content,
+    className,
+    vertical
+  } = props
+  if (!image && !title) return null
+  if (vertical) return <TextImageSplitVertical {...props} />
+  return (
+    <div className={className}>
+      <Grid
+        direction={textOnTheRight && 'row-reverse'}
+        gap={true}
+        align="center"
+      >
+        <GridItem span={{ xs: 12, md: 6 }}>
+          <Stagger>
+            {title && <H3>{title}</H3>}
+            {subtitle && (
+              <P className="TextImageSplit__subtitle label">{subtitle}</P>
+            )}
+            {content && (
+              <Editor className="TextImageSplit__content" blocks={content} />
+            )}
+          </Stagger>
+        </GridItem>
+        <GridItem span={{ xs: 12, md: 6 }}>
+          <Animate>
+            <CloudinaryMediaResolver node={image} aspect={aspect} />
+          </Animate>
+        </GridItem>
+      </Grid>
+    </div>
+  )
+}
+
+const TextImageSplitVertical = ({
   textOnTheRight = false,
   image,
   aspect,
   title,
   subtitle,
   content,
-  className
+  vertical
 }) => {
-  if (!image && !title) return null
   return (
-    <div className={className}>
-      <Grid
-        reverse={textOnTheRight}
-        columns={{ xs: 1, md: 2 }}
-        gap={true}
-        align="center"
-      >
-        <GridItem span={{ xs: 12, md: 6 }}>
-          <motion.div
-            className="content"
-            variants={transitions.stagger}
-            initial="initial"
-            animate="animate"
-            exit="initial"
-          >
-            {title && (
-              <H3 as={motion.h3} variants={transitions.fadeInUp}>
-                {title}
-              </H3>
-            )}
-            {subtitle && (
-              <motion.p
-                variants={transitions.fadeInUp}
-                className="TextImageSplit__subtitle"
-              >
-                {subtitle}
-              </motion.p>
-            )}
-            {content && (
-              <motion.div variants={transitions.fadeInUp}>
-                <Editor className="TextImageSplit__content" blocks={content} />
-              </motion.div>
-            )}
-          </motion.div>
-        </GridItem>
-        <GridItem span={{ xs: 12, md: 6 }}>
-          <motion.div
-            className="image"
-            whileHover={{ scale: 1.1 }}
-            {...transitions.fadeIn}
-          >
-            <CloudinaryMediaResolver node={image} aspect={aspect} />
-          </motion.div>
-        </GridItem>
-      </Grid>
-    </div>
+    <Grid gap={true} direction={textOnTheRight && 'column-reverse'}>
+      <GridItem offset={{ xs: 0, md: 2 }} span={{ xs: 12, md: 8 }}>
+        <Stagger className="content">
+          {title && <H3>{title}</H3>}
+          {subtitle && (
+            <P className="TextImageSplit__subtitle label">{subtitle}</P>
+          )}
+          {content && (
+            <Editor className="TextImageSplit__content" blocks={content} />
+          )}
+        </Stagger>
+      </GridItem>
+      <GridItem span={{ xs: 12, md: 8 }}>
+        <Animate>
+          <CloudinaryMediaResolver node={image} aspect={aspect} />
+        </Animate>
+      </GridItem>
+    </Grid>
   )
 }
+
+const TextImageSplitVerticalWrapper = styled.div(({ theme }) => css``)
 
 export default styled(TextImageSplit)(
   ({ theme }) => css`
@@ -75,7 +87,6 @@ export default styled(TextImageSplit)(
         ${spacing.sm('mt')}
       }
       &__subtitle {
-        color: ${theme.colors.textGrey};
         ${spacing.sm('mt')}
       }
     }

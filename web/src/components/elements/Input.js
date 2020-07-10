@@ -1,5 +1,6 @@
 import React from 'react'
-import { Field, ErrorMessage } from 'formik'
+import { Field } from 'formik'
+import { FormBlock, StyledInput } from './Form'
 
 const Input = ({
   name,
@@ -14,24 +15,26 @@ const Input = ({
     name.length
   )}`
   return (
-    <div className="Form__block">
+    <FormBlock>
       {!noLabel && (
         <label htmlFor={name} className="Form__label">
           {upperCaseName}
         </label>
       )}
-      <Field
+      <StyledInput
+        as={Field}
+        error={errors[name] && touched[name]}
         id={name}
         type={type}
         name={name}
         placeholder={placeholder && placeholder}
       />
-      {errors[name] && (
-        <p className="Form__feedback">
+      {/* {errors[name] && (
+        <FormFeedBack>
           <ErrorMessage name={name} />
-        </p>
-      )}
-    </div>
+        </FormFeedBack>
+      )} */}
+    </FormBlock>
   )
 }
 

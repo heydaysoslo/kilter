@@ -15,6 +15,10 @@ import Layout from './src/components/Layout'
 import './src/styles/reset.css'
 import './src/assets/fonts/fonts.css'
 
+import 'lazysizes/plugins/respimg/ls.respimg.js'
+import 'lazysizes/plugins/attrchange/ls.attrchange.js'
+import 'lazysizes'
+
 export const wrapRootElement = ({ element }) => (
   <AppProvider>{element}</AppProvider>
 )

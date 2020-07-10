@@ -6,13 +6,21 @@ export default {
   type: 'object',
   fieldsets: [
     { name: 'image', title: 'Image' },
-    { name: 'content', title: 'Content' }
+    { name: 'content', title: 'Content' },
+    { name: 'options', title: 'Options' }
   ],
   fields: [
     {
       name: 'textOnTheRight',
-      title: 'Text On The Right',
-      type: 'boolean'
+      title: 'Image first',
+      type: 'boolean',
+      fieldset: 'options'
+    },
+    {
+      name: 'vertical',
+      title: 'Stack vertically',
+      type: 'boolean',
+      fieldset: 'options'
     },
     {
       ...d.title,

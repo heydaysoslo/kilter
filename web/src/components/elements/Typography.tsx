@@ -13,6 +13,12 @@ export const P = styled.p<Props>(
     ${fonts.body()}
     ${spacing.sm('mt')};
 
+    ${modifiers &&
+      modifiers.includes('grey') &&
+      css`
+        color: ${theme.colors.textGrey};
+      `}
+
     ${modifiers === 'small' &&
       css`
         ${fonts.body()}
@@ -21,7 +27,7 @@ export const P = styled.p<Props>(
 
     ${modifiers === 'lead' &&
       css`
-        ${fonts.h3()}
+        ${fonts.h1()}
         ${spacing.md('mt')};
       `}
   `

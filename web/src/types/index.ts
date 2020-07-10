@@ -14,6 +14,21 @@ export type FlexBoxJustifyContent =
   | 'space-between'
   | 'space-around'
 
+export type FlexBoxDirection =
+  | 'row'
+  | 'row-reverse'
+  | 'column'
+  | 'column-reverse'
+
+export type FlexBoxDirectionResponsive = {
+  xs?: FlexBoxDirection
+  sm?: FlexBoxDirection
+  md?: FlexBoxDirection
+  lg?: FlexBoxDirection
+  xl?: FlexBoxDirection
+  xxl?: FlexBoxDirection
+}
+
 export type ResonsiveFlexBoxAlignItems = {
   xs?: FlexBoxAlignItems
   sm?: FlexBoxAlignItems
@@ -57,15 +72,6 @@ export type ResponsiveColumns = {
   lg?: number
   xl?: number
   xxl?: number
-}
-
-export type ResponsiveReverse = {
-  xs?: boolean
-  sm?: boolean
-  md?: boolean
-  lg?: boolean
-  xl?: boolean
-  xxl?: boolean
 }
 
 export type BorderProps =

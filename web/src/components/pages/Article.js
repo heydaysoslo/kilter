@@ -33,7 +33,7 @@ const Article = page => {
   return (
     <Container>
       <article className="Article">
-        <Grid reverse={{ md: true }}>
+        <Grid direction={{ md: 'row-reverse' }}>
           <GridItem span={{ sm: 12, md: 9 }}>
             <header className="Article__header">
               {title && <h1 className="Article__title">{title}</h1>}

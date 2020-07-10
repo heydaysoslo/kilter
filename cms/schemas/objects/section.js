@@ -4,14 +4,15 @@ export default {
   name: 'section',
   title: 'Section',
   type: 'object',
-  fields: [d.subtitle, d.editorMinimal],
+  fields: [d.title, d.subtitle, d.editorMinimal],
   preview: {
     select: {
-      title: 'subtitle'
+      title: 'title',
+      subtitle: 'subtitle'
     },
-    prepare({ title }) {
+    prepare({ title, subtitle }) {
       return {
-        title,
+        title: title || subtitle || 'No title',
         subtitle: 'Section'
       }
     }

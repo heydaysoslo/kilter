@@ -105,6 +105,10 @@ export const globalTypeStyle = ({ theme }) => css`
     color: ${theme.colors.interactive};
   }
 
+  .label {
+    color: ${theme.colors.textGrey};
+  }
+
   .sans {
     font-family: ${theme.fontFamily.sans};
   }

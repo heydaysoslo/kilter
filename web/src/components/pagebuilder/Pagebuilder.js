@@ -12,6 +12,7 @@ import Tabs from '../elements/Tabs'
 import styled from 'styled-components'
 import { spacing } from '../../styles/utilities'
 import { transitions } from '../../utils/animation'
+import { Stagger } from '../elements'
 
 const CarouselSection = loadable(() => import('./CarouselSection'))
 
@@ -23,41 +24,47 @@ const sectionTypes = {
   textImageSplit: TextImageSplit,
   carousel: CarouselSection,
   tabs: Tabs,
-  videoSection: VideoSection
+  videoSection: VideoSection,
+  moduleReference: props => {
+    if (props?.globalModule?.pagebuilder?.sections) {
+      // Don't allow nested module references
+      const sections = props.globalModule.pagebuilder.sections.filter(
+        section => section._type !== 'moduleReference'
+      )
+      if (sections.length) {
+        return <PageBuilder sections={sections} />
+      }
+      return null
+    }
+    return null
+  }
 }
 
 const StyledPageBuilder = styled(motion.div)`
-  .PageBuilder__item {
+  .PageBuilder__item:not(:first-child) {
     ${spacing.section('mt')};
   }
 `
 
 const PageBuilder = ({ sections }) => {
   return (
-    <StyledPageBuilder
-      variants={transitions.stagger}
-      initial="initial"
-      animate="animate"
-      exit="initial"
-    >
-      {sections.map((section, index) => {
-        const Component = sectionTypes[section._type] || null
-        return Component ? (
-          <div key={section._key}>
-            <motion.div variants={transitions.fadeInUp} exit="initial">
-              <Component
-                {...section}
-                prevComp={sections[index - 1] ? sections[index - 1] : null}
-                nextComp={sections[index + 1] ? sections[index + 1] : null}
-              />
-            </motion.div>
-          </div>
-        ) : (
-          <p key={section._key} style={{ background: 'yellow' }}>
-            Component {section._type} not found
-          </p>
-        )
-      })}
+    <StyledPageBuilder>
+      <Stagger childrenClassName="PageBuilder__item">
+        {sections.map((section, index) => {
+          const Component = sectionTypes[section._type] || null
+          return Component ? (
+            <Component
+              {...section}
+              prevComp={sections[index - 1] ? sections[index - 1] : null}
+              nextComp={sections[index + 1] ? sections[index + 1] : null}
+            />
+          ) : (
+            <p key={section._key} style={{ background: 'yellow' }}>
+              Component {section._type} not found
+            </p>
+          )
+        })}
+      </Stagger>
     </StyledPageBuilder>
   )
 }

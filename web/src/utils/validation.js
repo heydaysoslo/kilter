@@ -2,6 +2,7 @@ import * as yup from 'yup'
 
 export const newsletterSchema = yup.object().shape({
   name: yup.string(),
+  company: yup.string(),
   email: yup
     .string()
     .email()

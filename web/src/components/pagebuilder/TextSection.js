@@ -4,7 +4,7 @@ import Editor from '../editor/'
 const TextSection = props => {
   return (
     <div className="TextSection">
-      <Editor blocks={props.body} />
+      <Editor blocks={props._rawEditor} />
     </div>
   )
 }

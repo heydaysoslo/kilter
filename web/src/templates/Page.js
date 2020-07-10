@@ -30,10 +30,15 @@ export const query = graphql`
   fragment Page on SanityPage {
     _key
     title
+    _rawEditorMinimal
+    subtitle
     _type
     template
     slug {
       current
+    }
+    mainImage {
+      ...MainImage
     }
     pagebuilder: _rawPagebuilder(resolveReferences: { maxDepth: 20 })
     seo {
