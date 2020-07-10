@@ -78,8 +78,6 @@ const TextImageSplitVertical = ({
   )
 }
 
-const TextImageSplitVerticalWrapper = styled.div(({ theme }) => css``)
-
 export default styled(TextImageSplit)(
   ({ theme }) => css`
     .TextImageSplit {

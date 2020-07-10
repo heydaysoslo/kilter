@@ -11,7 +11,7 @@ const Newsletter = props => {
     status,
     touched,
     errors,
-    dirty,
+    // dirty,
     // setSubmitting,
     // isValid,
     isSubmitting,
@@ -19,7 +19,7 @@ const Newsletter = props => {
     // handleChange,
     // handleBlur,
     handleSubmit,
-    handleReset,
+    // handleReset,
     concentText
   } = props
   return (

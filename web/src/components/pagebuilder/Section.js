@@ -1,5 +1,4 @@
 import React from 'react'
-import { motion } from 'framer-motion'
 
 import Editor from '../editor/'
 import { P, H2, Grid, GridItem, Stagger, Animate } from '../elements'

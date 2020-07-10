@@ -11,7 +11,6 @@ import VideoSection from './VideoSection'
 import Tabs from '../elements/Tabs'
 import styled from 'styled-components'
 import { spacing } from '../../styles/utilities'
-import { transitions } from '../../utils/animation'
 import { Stagger } from '../elements'
 
 const CarouselSection = loadable(() => import('./CarouselSection'))
