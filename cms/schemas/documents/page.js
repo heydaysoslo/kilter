@@ -1,4 +1,5 @@
 import FaFileO from 'react-icons/lib/fa/file-text-o'
+import d from '../defaults'
 // import PageIcon from '../../custom/components/icons/PageIcon'
 // import Conditional from '../../custom/components/Conditional'
 
@@ -10,6 +11,7 @@ export default {
   initialValue: {
     template: 'default'
   },
+  fieldsets: [{ name: 'header', title: 'Header' }],
   fields: [
     {
       name: 'title',
@@ -29,15 +31,13 @@ export default {
         maxLength: 96
       }
     },
-    // {
-    //   name: 'content',
-    //   title: 'Content',
-    //   type: 'content'
-    // },
+    { ...d.subtitle, fieldset: 'header' },
+    { ...d.editorMinimal, fieldset: 'header' },
     {
       name: 'mainImage',
       title: 'Main image',
-      type: 'mainImage'
+      type: 'mainImage',
+      fieldset: 'header'
     },
     // {
     //   name: 'menuTheme',
