@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "cd web && netlify dev",
-    "start-cms": "cd cms && sanity start"
+    "live": "cd web && netlify dev -l",
+    "cms": "cd cms && sanity start",
+    "deploy:graphql": "cd cms && yarn deploy:graphql"
   },
   "workspaces": [
     "cms",
