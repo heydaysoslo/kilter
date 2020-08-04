@@ -99,11 +99,11 @@ export const responsiveFonts = {
 }
 
 export const aspect = {
-  portrait: 7 / 6,
-  landscape: 2 / 3,
+  portrait: 3 / 4,
+  landscape: 3 / 2,
   square: 1,
-  widescreen: 9 / 16,
-  panorama: 11 / 16
+  widescreen: 16 / 9,
+  panorama: 16 / 11
 }
 
 export const contentWidth = {

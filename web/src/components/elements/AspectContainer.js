@@ -2,7 +2,7 @@ import React, { useRef, useLayoutEffect, useState, useMemo } from 'react'
 import styled from 'styled-components'
 import useMediaQuery from '../hooks/useMediaQuery'
 import useWindowSize from '../hooks/useWindowSize'
-import { breakpoints } from '../../styles/themes'
+import { breakpoints, aspect as themeAspects } from '../../styles/themes'
 
 const StyledAspectContainer = styled.div`
   position: relative;
@@ -34,7 +34,6 @@ const AspectContainer = ({
   const contentEl = useRef(null)
   const wrapperEl = useRef(null)
   const [currentRatio, setCurrentRatio] = useState(1)
-  console.log('currentRatio', currentRatio)
 
   // Compute a full set of ratios based on breakpoints
   const computeRatios = () => {
@@ -43,11 +42,12 @@ const AspectContainer = ({
     for (const bp of Object.keys(breakpoints)) {
       // If "ratio" and not "ratios" is set, override all values with "ratio"
       if (aspect) {
-        calculatedRatios[bp] = aspect
+        calculatedRatios[bp] = themeAspects[aspect] || aspect
       } else {
         if (aspects[bp] !== undefined) {
-          calculatedRatios[bp] = aspects[bp]
-          prevRatio = aspects[bp]
+          const aspectVal = themeAspects[aspects[bp]] || aspects[bp]
+          calculatedRatios[bp] = aspectVal
+          prevRatio = aspectVal
         } else {
           calculatedRatios[bp] = prevRatio
         }
@@ -107,7 +107,7 @@ const AspectContainer = ({
     >
       <div
         style={{
-          paddingTop: currentRatio !== false ? `${currentRatio * 100}%` : null
+          paddingTop: currentRatio !== false ? `${100 / currentRatio}%` : null
         }}
       />
       {children && (

@@ -15,11 +15,11 @@ const Card = ({ className, title, image, excerpt, link }) => (
     <LinkResolver link={link}>
       <Animate className="media">
         {image ? (
-          <CloudinaryImage node={image} aspectRatio="portrait" />
+          <CloudinaryImage node={image} aspectRatio="landscape" />
         ) : (
           <AspectContainer
             aspects={{
-              xs: 'widescreen'
+              xs: 'landscape'
             }}
           />
         )}
