@@ -53,6 +53,7 @@ const PageBuilder = ({ sections }) => {
           const Component = sectionTypes[section._type] || null
           return Component ? (
             <Component
+              key={section._key}
               {...section}
               prevComp={sections[index - 1] ? sections[index - 1] : null}
               nextComp={sections[index + 1] ? sections[index + 1] : null}
