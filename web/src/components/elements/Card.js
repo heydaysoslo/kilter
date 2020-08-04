@@ -7,47 +7,41 @@ import styled, { css } from 'styled-components'
 import { P } from './Typography'
 import { spacing } from '../../styles/utilities'
 import CloudinaryImage from './CloudinaryImage'
-import AnimateInView from './AnimateInView'
+import Animate from './Animate'
+import Stagger from './Stagger'
 
 const Card = ({ className, title, image, excerpt, link }) => (
-  <AnimateInView className={className} activeClassName="is-visible">
+  <div className={className}>
     <LinkResolver link={link}>
-      <div className="media">
+      <Animate className="media">
         {image ? (
           <CloudinaryImage node={image} aspectRatio="portrait" />
         ) : (
           <AspectContainer
-            aspect={{
-              xs: 'portrait'
+            aspects={{
+              xs: 'widescreen'
             }}
           />
         )}
-      </div>
-      {title && (
-        <P modifiers="large" className="title">
-          {title}
-        </P>
-      )}
-      {excerpt && (
-        <div className="excerpt">
-          <Editor blocks={excerpt} />
-        </div>
-      )}
+      </Animate>
+      <Stagger>
+        {title && (
+          <P modifiers="large" className="title">
+            {title}
+          </P>
+        )}
+        {excerpt && (
+          <div className="excerpt">
+            <Editor blocks={excerpt} />
+          </div>
+        )}
+      </Stagger>
     </LinkResolver>
-  </AnimateInView>
+  </div>
 )
 
 export default styled(Card)(
   ({ theme }) => css`
-    /* transition: opacity $trans, transform $trans; */
-    opacity: 0;
-    transform: translateY(50px);
-
-    &.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
     .media {
       background: #f1f1f1;
     }

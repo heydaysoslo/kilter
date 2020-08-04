@@ -1,5 +1,5 @@
 import React from 'react'
-import { Grid } from '../elements'
+import { Grid, GridItem } from '../elements'
 
 import Card from '../elements/Card'
 import { LinkResolver } from '../resolvers'
@@ -8,17 +8,18 @@ const CardSection = ({ title, seeAllLink, cardsList = [], ...props }) => {
   return (
     <div className="CardSection">
       {title && <h2>{title}</h2>}
-      <Grid columns={{ sm: 1, md: 3 }} gap={true}>
+      <Grid gap={true}>
         {cardsList.map(card => {
           const { content, cardOverride } = card
           return (
-            <Card
-              key={card?._key}
-              title={cardOverride?.title || content?.title}
-              image={cardOverride?.image || content?.mainImage}
-              excerpt={cardOverride?.content || content?.excerpt}
-              link={cardOverride?.link || content}
-            />
+            <GridItem span={{ xs: 12, md: 4 }} key={card?._key}>
+              <Card
+                title={cardOverride?.title || content?.title}
+                image={cardOverride?.image || content?.mainImage}
+                excerpt={cardOverride?.content || content?.excerpt}
+                link={cardOverride?.link || content}
+              />
+            </GridItem>
           )
         })}
       </Grid>
