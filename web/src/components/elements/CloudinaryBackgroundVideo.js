@@ -1,7 +1,6 @@
-import React, { useRef, useLayoutEffect, useState } from 'react'
+import React, { useRef, useLayoutEffect } from 'react'
 import styled, { css } from 'styled-components'
-
-import { Button } from '.'
+import { useInView } from 'react-intersection-observer'
 import { cldGetVideoUrl } from '../../utils/cloudinary'
 
 /*
@@ -19,36 +18,37 @@ https://res.cloudinary.com/<cloud name>/video/upload/<public ID>.<video format f
 "https://res.cloudinary.com/handsomefrank/video/upload/v1590428051/animation/Abbey_Lossing_resolutions_pndo2d.mp4"
 */
 
-const CloudinaryVideo = ({
+const CloudinaryBackgroundVideo = ({
   node,
   className,
-  options = { blur: true, autoPlay: true }
+  options = { blur: true }
 }) => {
   const videoUrl = node ? cldGetVideoUrl(node, options) : ''
   const player = useRef(null)
-  const [shouldPlay, setShouldPlay] = useState(false)
+  const [inViewRef, inView] = useInView()
 
+  // Toggle play/pause on enter/leave view
   useLayoutEffect(() => {
-    if (player?.current && shouldPlay) {
-      player.current.play()
+    if (player?.current) {
+      if (inView) {
+        player.current.play()
+      } else {
+        player.current.pause()
+      }
     }
-  }, [shouldPlay, options])
+  }, [inView])
 
   if (!node) return null
 
   return (
-    <div className={className}>
-      {!options.autoPlay && !shouldPlay && (
-        <Button onClick={() => setShouldPlay(true)}>Play</Button>
-      )}
+    <div ref={inViewRef} className={className}>
       <video
         ref={player}
         width={node.width}
         height={node.height}
-        autoPlay={options.autoPlay}
-        loop={options.autoPlay}
-        muted={options.autoPlay}
-        controls={!options.autoPlay && shouldPlay}
+        autoPlay
+        loop
+        muted
         playsInline
       >
         {videoUrl.map(({ src, type }) => {
@@ -60,31 +60,13 @@ const CloudinaryVideo = ({
   )
 }
 
-export default styled(CloudinaryVideo)(
+export default styled(CloudinaryBackgroundVideo)(
   ({ theme }) => css`
     position: relative;
-
     > video {
       width: 100%;
       height: auto;
       vertical-align: middle;
-    }
-
-    ${Button} {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      border-radius: 0;
-      border-width: 0;
-      color: ${theme.colors.white};
-
-      &:hover {
-        background: transparent;
-        color: ${theme.colors.white};
-      }
     }
   `
 )

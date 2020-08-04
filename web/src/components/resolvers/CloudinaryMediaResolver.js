@@ -1,6 +1,6 @@
 import React from 'react'
-import CloudinaryVideo from '../elements/CloudinaryVideo'
 import CloudinaryImage from '../elements/CloudinaryImage'
+import CloudinaryBackgroundVideo from '../elements/CloudinaryBackgroundVideo'
 
 const CloudinaryMediaResolver = ({ node, aspectRatio }) => {
   const isNested = node?.hasOwnProperty('image')
@@ -13,7 +13,7 @@ const CloudinaryMediaResolver = ({ node, aspectRatio }) => {
     node?.image?.resource_type === 'video' ||
     node?.resource_type === 'video'
   ) {
-    return <CloudinaryVideo node={isNested ? node?.image : node} />
+    return <CloudinaryBackgroundVideo node={isNested ? node?.image : node} />
   }
   return null
 }
