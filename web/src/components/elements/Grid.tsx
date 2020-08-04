@@ -21,7 +21,7 @@ type Props = {
   gap?: object | boolean
   gapY?: object | boolean
   gapX?: object | boolean
-  direction: FlexBoxDirection | ResponsiveFlexBoxDirection
+  direction?: FlexBoxDirection | ResponsiveFlexBoxDirection
 }
 
 type GridItemProps = {
@@ -90,7 +90,7 @@ const setGridItemOffset = ({ offset, theme }) => {
   }
 }
 
-const setAlignItems = ({ align, theme }) => {
+const setAlignItems = ({ align }) => {
   switch (typeof align) {
     case 'string':
       return css`
@@ -105,7 +105,7 @@ const setAlignItems = ({ align, theme }) => {
   }
 }
 
-const setJustifyContent = ({ justify, theme }) => {
+const setJustifyContent = ({ justify }) => {
   switch (typeof justify) {
     case 'string':
       return css`
@@ -180,13 +180,12 @@ const setResponsiveGaps = ({ gap, cssProps, multiplier }) => {
 export default styled(BaseGrid)<Props>(
   ({
     columns,
-    gap,
+    gap = true,
     gapY,
     gapX,
     direction = 'row',
     align,
-    justify,
-    theme
+    justify
   }) => css`
     display: flex;
     flex: 0 1 auto;
