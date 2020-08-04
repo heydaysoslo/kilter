@@ -20,7 +20,7 @@ export type FlexBoxDirection =
   | 'column'
   | 'column-reverse'
 
-export type FlexBoxDirectionResponsive = {
+export type ResponsiveFlexBoxDirection = {
   xs?: FlexBoxDirection
   sm?: FlexBoxDirection
   md?: FlexBoxDirection
