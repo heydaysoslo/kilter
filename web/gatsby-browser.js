@@ -10,7 +10,6 @@ import 'intersection-observer'
 import { motion, AnimateSharedLayout, AnimatePresence } from 'framer-motion'
 
 import { AppProvider } from './src/components/context/AppContext'
-import Layout from './src/components/Layout'
 
 import './src/styles/reset.css'
 import './src/assets/fonts/fonts.css'

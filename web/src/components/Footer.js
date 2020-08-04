@@ -5,9 +5,6 @@ import { spacing } from '../styles/utilities'
 import { motion } from 'framer-motion'
 
 import { Grid, Container, GridItem, Icon, P } from './elements'
-import Newsletter from './Newsletter'
-import { LinkResolver } from './resolvers'
-import Social from './Social'
 import { transitions } from '../utils/animation'
 
 const StyledFooter = styled.footer`
@@ -21,10 +18,7 @@ const StyledFooter = styled.footer`
 
 const Footer = () => {
   const data = useStaticQuery(query)
-  // const menu = data?.sanitySiteSettings?.footerMenu?._rawItem
-  const privacyPage = data?.sanitySiteSettings?._rawPrivacypage
   const companyInfo = data?.companyInfo
-  console.log('Footer -> companyInfo', data)
   return (
     <StyledFooter
       as={motion.footer}
@@ -98,26 +92,6 @@ const Footer = () => {
               )}
             </P>
           </GridItem>
-          {/* <GridItem span={{ xs: 6, md: 3 }}>
-            <motion.div
-              variants={transitions.fadeInUp}
-              className="Footer__privacy"
-            >
-              {privacyPage && (
-                <LinkResolver link={privacyPage}>
-                  {privacyPage.title}
-                </LinkResolver>
-              )}
-            </motion.div>
-          </GridItem>
-          <GridItem span={{ xs: 6, md: 3 }}>
-            <motion.div
-              variants={transitions.fadeInUp}
-              className="Footer__newsletter"
-            >
-              <Newsletter />
-            </motion.div>
-          </GridItem> */}
         </Grid>
       </Container>
     </StyledFooter>
