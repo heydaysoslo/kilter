@@ -28,6 +28,7 @@ type Name =
   | 'spotify'
   | 'twitter'
   | 'rss'
+  | 'logo'
 
 type Props = {
   name: Name
