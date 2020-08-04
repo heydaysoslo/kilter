@@ -22,13 +22,28 @@ export const wrapRootElement = ({ element }) => (
   <AppProvider>{element}</AppProvider>
 )
 
+let scrollY = 0
+
+export const onPreRouteUpdate = () => {
+  scrollY = window.scrollY
+}
+
+export const onRouteUpdate = () => {
+  window.scroll(0, scrollY)
+}
+
 export const wrapPageElement = data => {
   const { element, props } = data
   // props provide same data to Layout as Page element will get
   // including location, data, etc - you don't need to pass it
   return (
     <AnimateSharedLayout type="crossfade">
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence
+        exitBeforeEnter
+        // onExitComplete={props => {
+        //   window.scroll(0, 600)
+        // }}
+      >
         <motion.div key={props.path}>{element}</motion.div>
       </AnimatePresence>
     </AnimateSharedLayout>
