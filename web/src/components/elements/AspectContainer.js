@@ -34,6 +34,7 @@ const AspectContainer = ({
   const contentEl = useRef(null)
   const wrapperEl = useRef(null)
   const [currentRatio, setCurrentRatio] = useState(1)
+  console.log('currentRatio', currentRatio)
 
   // Compute a full set of ratios based on breakpoints
   const computeRatios = () => {
