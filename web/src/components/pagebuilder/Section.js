@@ -9,7 +9,7 @@ const Section = props => {
   return (
     <Stagger className={className}>
       {(subtitle || title) && (
-        <Grid>
+        <Grid gap={true}>
           <GridItem offset={{ xs: 0, md: 2 }} span={{ xs: 12, md: 4 }}>
             {title && <H2 className="label">{title}</H2>}
             {subtitle && (
@@ -21,7 +21,7 @@ const Section = props => {
         </Grid>
       )}
       {editorMinimal && (
-        <Grid>
+        <Grid gap={true}>
           <GridItem span={{ xs: 12, md: 8 }}>
             <Animate>
               <Editor className="content" blocks={editorMinimal} />
