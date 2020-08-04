@@ -13,14 +13,18 @@ import { transitions } from '../utils/animation'
 const StyledFooter = styled.footer`
   ${spacing.section('mt,py')};
   border-top: 1px solid #000;
+
+  .logo {
+    max-width: 50px;
+  }
 `
 
 const Footer = () => {
   const data = useStaticQuery(query)
   // const menu = data?.sanitySiteSettings?.footerMenu?._rawItem
   const privacyPage = data?.sanitySiteSettings?._rawPrivacypage
-  const companyInfo = data?.sanityCompanyInfo
-  console.log('Footer -> companyInfo', companyInfo)
+  const companyInfo = data?.companyInfo
+  console.log('Footer -> companyInfo', data)
   return (
     <StyledFooter
       as={motion.footer}
@@ -36,9 +40,11 @@ const Footer = () => {
       exit="initial"
     >
       <Container>
-        <Grid gap="my" columns={{ sm: 2, md: 4 }}>
+        <Grid gap={true}>
           <GridItem span={{ xs: 6, md: 3 }}>
-            <Icon name="logo" />
+            <div className="logo">
+              <Icon name="logo" />
+            </div>
             <P modifiers="grey">
               &copy; {new Date().getFullYear()}&nbsp;
               {companyInfo?.name && companyInfo.name}. All rights reserved.
@@ -63,6 +69,32 @@ const Footer = () => {
               )}
               {companyInfo?.address?.region && (
                 <span>{companyInfo?.address?.region}</span>
+              )}
+              {companyInfo?.address?.country && (
+                <span>
+                  <br />
+                  {companyInfo?.address?.country}
+                </span>
+              )}
+            </P>
+          </GridItem>
+          <GridItem offset={{ xs: 6, md: 0 }} span={{ xs: 6, md: 2 }}>
+            <P>
+              Get in touch <br />
+              {companyInfo.email && (
+                <span>
+                  <a href={`mailto:${companyInfo.email}`}>
+                    {companyInfo.email}
+                  </a>
+                  <br />
+                </span>
+              )}
+              {companyInfo.phone && (
+                <span>
+                  <a href={`tel:${companyInfo.phone.split(' ').join('')}`}>
+                    {companyInfo.phone}
+                  </a>
+                </span>
               )}
             </P>
           </GridItem>
@@ -102,7 +134,7 @@ export const query = graphql`
         _rawItem(resolveReferences: { maxDepth: 10 })
       }
     }
-    sanityCompanyInfo(_id: { eq: "companyInfo" }) {
+    companyInfo: sanityCompanyInfo(_id: { eq: "companyInfo" }) {
       email
       name
       address {
