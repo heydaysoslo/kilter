@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Layout from '../Layout'
 
 // value === Comp. filename as a string
 const templates = {
@@ -33,5 +34,9 @@ export default function TemplateResolver({ page }) {
 
   if (!Component) return <div style={{ minHeight: '100vh' }} />
 
-  return <Component {...page} />
+  return (
+    <Layout page={page}>
+      <Component {...page} />
+    </Layout>
+  )
 }

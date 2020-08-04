@@ -23,17 +23,14 @@ export const wrapRootElement = ({ element }) => (
   <AppProvider>{element}</AppProvider>
 )
 
-export const wrapPageElement = ({ element, props }) => {
+export const wrapPageElement = data => {
+  const { element, props } = data
   // props provide same data to Layout as Page element will get
   // including location, data, etc - you don't need to pass it
   return (
     <AnimateSharedLayout type="crossfade">
       <AnimatePresence exitBeforeEnter>
-        <motion.div key={props.path}>
-          <Layout {...props} page={props.data.page}>
-            {element}
-          </Layout>
-        </motion.div>
+        <motion.div key={props.path}>{element}</motion.div>
       </AnimatePresence>
     </AnimateSharedLayout>
   )
